@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		55F5175B1AD2E052009D06EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175A1AD2E052009D06EC /* AppDelegate.swift */; };
+		55F5175E1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175C1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld */; };
+		55F517601AD2E052009D06EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175F1AD2E052009D06EC /* ViewController.swift */; };
+		55F517631AD2E052009D06EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F517611AD2E052009D06EC /* Main.storyboard */; };
+		55F517651AD2E052009D06EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55F517641AD2E052009D06EC /* Images.xcassets */; };
+		55F517681AD2E052009D06EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F517661AD2E052009D06EC /* LaunchScreen.xib */; };
+		55F517741AD2E052009D06EC /* Atlantic_BlankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F517731AD2E052009D06EC /* Atlantic_BlankTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		55F5176E1AD2E052009D06EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55F5174D1AD2E052009D06EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55F517541AD2E052009D06EC;
+			remoteInfo = Atlantic_Blank;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		55F517551AD2E052009D06EC /* Atlantic_Blank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlantic_Blank.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55F517591AD2E052009D06EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55F5175A1AD2E052009D06EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		55F5175D1AD2E052009D06EC /* Atlantic_Blank.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Atlantic_Blank.xcdatamodel; sourceTree = "<group>"; };
+		55F5175F1AD2E052009D06EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		55F517621AD2E052009D06EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		55F517641AD2E052009D06EC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		55F517671AD2E052009D06EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		55F5176D1AD2E052009D06EC /* Atlantic_BlankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Atlantic_BlankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55F517721AD2E052009D06EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55F517731AD2E052009D06EC /* Atlantic_BlankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atlantic_BlankTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		55F517521AD2E052009D06EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55F5176A1AD2E052009D06EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		55F5174C1AD2E052009D06EC = {
+			isa = PBXGroup;
+			children = (
+				55F517571AD2E052009D06EC /* Atlantic_Blank */,
+				55F517701AD2E052009D06EC /* Atlantic_BlankTests */,
+				55F517561AD2E052009D06EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		55F517561AD2E052009D06EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55F517551AD2E052009D06EC /* Atlantic_Blank.app */,
+				55F5176D1AD2E052009D06EC /* Atlantic_BlankTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		55F517571AD2E052009D06EC /* Atlantic_Blank */ = {
+			isa = PBXGroup;
+			children = (
+				55F5175A1AD2E052009D06EC /* AppDelegate.swift */,
+				55F5175F1AD2E052009D06EC /* ViewController.swift */,
+				55F517611AD2E052009D06EC /* Main.storyboard */,
+				55F517641AD2E052009D06EC /* Images.xcassets */,
+				55F517661AD2E052009D06EC /* LaunchScreen.xib */,
+				55F5175C1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld */,
+				55F517581AD2E052009D06EC /* Supporting Files */,
+			);
+			path = Atlantic_Blank;
+			sourceTree = "<group>";
+		};
+		55F517581AD2E052009D06EC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				55F517591AD2E052009D06EC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		55F517701AD2E052009D06EC /* Atlantic_BlankTests */ = {
+			isa = PBXGroup;
+			children = (
+				55F517731AD2E052009D06EC /* Atlantic_BlankTests.swift */,
+				55F517711AD2E052009D06EC /* Supporting Files */,
+			);
+			path = Atlantic_BlankTests;
+			sourceTree = "<group>";
+		};
+		55F517711AD2E052009D06EC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				55F517721AD2E052009D06EC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		55F517541AD2E052009D06EC /* Atlantic_Blank */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55F517771AD2E052009D06EC /* Build configuration list for PBXNativeTarget "Atlantic_Blank" */;
+			buildPhases = (
+				55F517511AD2E052009D06EC /* Sources */,
+				55F517521AD2E052009D06EC /* Frameworks */,
+				55F517531AD2E052009D06EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Atlantic_Blank;
+			productName = Atlantic_Blank;
+			productReference = 55F517551AD2E052009D06EC /* Atlantic_Blank.app */;
+			productType = "com.apple.product-type.application";
+		};
+		55F5176C1AD2E052009D06EC /* Atlantic_BlankTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55F5177A1AD2E052009D06EC /* Build configuration list for PBXNativeTarget "Atlantic_BlankTests" */;
+			buildPhases = (
+				55F517691AD2E052009D06EC /* Sources */,
+				55F5176A1AD2E052009D06EC /* Frameworks */,
+				55F5176B1AD2E052009D06EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55F5176F1AD2E052009D06EC /* PBXTargetDependency */,
+			);
+			name = Atlantic_BlankTests;
+			productName = Atlantic_BlankTests;
+			productReference = 55F5176D1AD2E052009D06EC /* Atlantic_BlankTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		55F5174D1AD2E052009D06EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Nicholas Digiando";
+				TargetAttributes = {
+					55F517541AD2E052009D06EC = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					55F5176C1AD2E052009D06EC = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 55F517541AD2E052009D06EC;
+					};
+				};
+			};
+			buildConfigurationList = 55F517501AD2E052009D06EC /* Build configuration list for PBXProject "Atlantic_Blank" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 55F5174C1AD2E052009D06EC;
+			productRefGroup = 55F517561AD2E052009D06EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				55F517541AD2E052009D06EC /* Atlantic_Blank */,
+				55F5176C1AD2E052009D06EC /* Atlantic_BlankTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55F517531AD2E052009D06EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55F517631AD2E052009D06EC /* Main.storyboard in Resources */,
+				55F517681AD2E052009D06EC /* LaunchScreen.xib in Resources */,
+				55F517651AD2E052009D06EC /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55F5176B1AD2E052009D06EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		55F517511AD2E052009D06EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55F517601AD2E052009D06EC /* ViewController.swift in Sources */,
+				55F5175E1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld in Sources */,
+				55F5175B1AD2E052009D06EC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55F517691AD2E052009D06EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55F517741AD2E052009D06EC /* Atlantic_BlankTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55F5176F1AD2E052009D06EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55F517541AD2E052009D06EC /* Atlantic_Blank */;
+			targetProxy = 55F5176E1AD2E052009D06EC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		55F517611AD2E052009D06EC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55F517621AD2E052009D06EC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		55F517661AD2E052009D06EC /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55F517671AD2E052009D06EC /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		55F517751AD2E052009D06EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		55F517761AD2E052009D06EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		55F517781AD2E052009D06EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Atlantic_Blank/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		55F517791AD2E052009D06EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Atlantic_Blank/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		55F5177B1AD2E052009D06EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Atlantic_BlankTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Atlantic_Blank.app/Atlantic_Blank";
+			};
+			name = Debug;
+		};
+		55F5177C1AD2E052009D06EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Atlantic_BlankTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Atlantic_Blank.app/Atlantic_Blank";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		55F517501AD2E052009D06EC /* Build configuration list for PBXProject "Atlantic_Blank" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55F517751AD2E052009D06EC /* Debug */,
+				55F517761AD2E052009D06EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55F517771AD2E052009D06EC /* Build configuration list for PBXNativeTarget "Atlantic_Blank" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55F517781AD2E052009D06EC /* Debug */,
+				55F517791AD2E052009D06EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		55F5177A1AD2E052009D06EC /* Build configuration list for PBXNativeTarget "Atlantic_BlankTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55F5177B1AD2E052009D06EC /* Debug */,
+				55F5177C1AD2E052009D06EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		55F5175C1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				55F5175D1AD2E052009D06EC /* Atlantic_Blank.xcdatamodel */,
+			);
+			currentVersion = 55F5175D1AD2E052009D06EC /* Atlantic_Blank.xcdatamodel */;
+			path = Atlantic_Blank.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 55F5174D1AD2E052009D06EC /* Project object */;
+}
