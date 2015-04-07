@@ -528,20 +528,16 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println(" cell Selected")
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if(editMode == true){
+       // if(editMode == true){
             if(indexPath.row == 0){
                 println("add new")
-                let itemViewController = ItemViewController()
+                let itemViewController = ItemViewController(laborMode: true)
                 navigationController?.pushViewController(itemViewController, animated: true )
             }else{
-                let itemViewController = ItemViewController()
+                let itemViewController = ItemViewController(laborMode: true)
                 navigationController?.pushViewController(itemViewController, animated: true )
             }
-        }else{
-            let itemViewController = ItemViewController()
-            navigationController?.pushViewController(itemViewController, animated: true )
-            
-        }
+       
     }
     
     

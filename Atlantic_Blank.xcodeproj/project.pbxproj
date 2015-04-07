@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		558CC9211AD3FF2000702579 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CC9201AD3FF2000702579 /* TaskViewController.swift */; };
+		558CC9231AD3FF5B00702579 /* UsageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CC9221AD3FF5B00702579 /* UsageListViewController.swift */; };
+		558CC9251AD4168600702579 /* UsageEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558CC9241AD4168600702579 /* UsageEntryViewController.swift */; };
 		55F5175B1AD2E052009D06EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175A1AD2E052009D06EC /* AppDelegate.swift */; };
 		55F5175E1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175C1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld */; };
 		55F517601AD2E052009D06EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175F1AD2E052009D06EC /* ViewController.swift */; };
-		55F517631AD2E052009D06EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F517611AD2E052009D06EC /* Main.storyboard */; };
 		55F517651AD2E052009D06EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55F517641AD2E052009D06EC /* Images.xcassets */; };
 		55F517681AD2E052009D06EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F517661AD2E052009D06EC /* LaunchScreen.xib */; };
 		55F517741AD2E052009D06EC /* Atlantic_BlankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F517731AD2E052009D06EC /* Atlantic_BlankTests.swift */; };
@@ -43,12 +45,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		558CC9201AD3FF2000702579 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		558CC9221AD3FF5B00702579 /* UsageListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageListViewController.swift; sourceTree = "<group>"; };
+		558CC9241AD4168600702579 /* UsageEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageEntryViewController.swift; sourceTree = "<group>"; };
 		55F517551AD2E052009D06EC /* Atlantic_Blank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlantic_Blank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F517591AD2E052009D06EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55F5175A1AD2E052009D06EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55F5175D1AD2E052009D06EC /* Atlantic_Blank.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Atlantic_Blank.xcdatamodel; sourceTree = "<group>"; };
 		55F5175F1AD2E052009D06EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		55F517621AD2E052009D06EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		55F517641AD2E052009D06EC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55F517671AD2E052009D06EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		55F5176D1AD2E052009D06EC /* Atlantic_BlankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Atlantic_BlankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,13 +143,15 @@
 				55F5178D1AD2E7A8009D06EC /* NetData.swift */,
 				55F5178F1AD2E7F6009D06EC /* WorkOrderViewController.swift */,
 				55F517911AD2E843009D06EC /* ItemViewController.swift */,
+				558CC9201AD3FF2000702579 /* TaskViewController.swift */,
+				558CC9221AD3FF5B00702579 /* UsageListViewController.swift */,
+				558CC9241AD4168600702579 /* UsageEntryViewController.swift */,
 				55F517951AD2E85D009D06EC /* ItemListViewController.swift */,
 				55F517971AD2E878009D06EC /* ImageLoader.swift */,
 				55F5179B1AD2E8A0009D06EC /* ScheduleTableViewCell.swift */,
 				55F517991AD2E88D009D06EC /* EquipmentTableViewCell.swift */,
 				55F5179D1AD2E8B1009D06EC /* ItemTableViewCell.swift */,
 				55F517661AD2E052009D06EC /* LaunchScreen.xib */,
-				55F517611AD2E052009D06EC /* Main.storyboard */,
 				55F5175C1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld */,
 			);
 			path = Atlantic_Blank;
@@ -267,7 +273,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55F517631AD2E052009D06EC /* Main.storyboard in Resources */,
 				55F517681AD2E052009D06EC /* LaunchScreen.xib in Resources */,
 				55F517651AD2E052009D06EC /* Images.xcassets in Resources */,
 			);
@@ -335,12 +340,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558CC9231AD3FF5B00702579 /* UsageListViewController.swift in Sources */,
 				55F517981AD2E878009D06EC /* ImageLoader.swift in Sources */,
 				55F5178A1AD2E6B6009D06EC /* NewEquipmentViewController.swift in Sources */,
+				558CC9251AD4168600702579 /* UsageEntryViewController.swift in Sources */,
 				55F517601AD2E052009D06EC /* ViewController.swift in Sources */,
 				55F517801AD2E533009D06EC /* LayoutVars.swift in Sources */,
 				55F5178C1AD2E77B009D06EC /* ScheduleViewController.swift in Sources */,
 				55F517821AD2E5CE009D06EC /* EquipmentListViewController.swift in Sources */,
+				558CC9211AD3FF2000702579 /* TaskViewController.swift in Sources */,
 				55F517A21AD2EA65009D06EC /* NewMaintenanceItemViewController.swift in Sources */,
 				55F5179C1AD2E8A0009D06EC /* ScheduleTableViewCell.swift in Sources */,
 				55F517921AD2E843009D06EC /* ItemViewController.swift in Sources */,
@@ -375,14 +383,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		55F517611AD2E052009D06EC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				55F517621AD2E052009D06EC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		55F517661AD2E052009D06EC /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -479,6 +479,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Atlantic_Blank/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -490,6 +491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Atlantic_Blank/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
