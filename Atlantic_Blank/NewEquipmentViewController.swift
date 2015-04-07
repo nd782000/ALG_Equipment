@@ -469,13 +469,10 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
             println("values:----------\(self.typeValue)");
         }else{
             self.crewValue=self.crew[row]
+            self.crewTxtField.text=self.crew[row]
             println("values:----------\(self.crewValue)");
-            
         }
-        
-        
-        
-        
+    
     }
     
     
