@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55B17EDD1AD44A560079E0E0 /* NewEquipmentViewController in Resources */ = {isa = PBXBuildFile; fileRef = 55B17EDC1AD44A560079E0E0 /* NewEquipmentViewController */; };
 		55F5175B1AD2E052009D06EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175A1AD2E052009D06EC /* AppDelegate.swift */; };
 		55F5175E1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175C1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld */; };
 		55F517601AD2E052009D06EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175F1AD2E052009D06EC /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55B17EDC1AD44A560079E0E0 /* NewEquipmentViewController */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NewEquipmentViewController; sourceTree = "<group>"; };
 		55F517551AD2E052009D06EC /* Atlantic_Blank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlantic_Blank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F517591AD2E052009D06EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55F5175A1AD2E052009D06EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				55F517831AD2E625009D06EC /* EquipmentAPI.swift */,
 				55F517871AD2E671009D06EC /* EquipmentViewController.swift */,
 				55F517891AD2E6B6009D06EC /* NewEquipmentViewController.swift */,
+				55B17EDC1AD44A560079E0E0 /* NewEquipmentViewController */,
 				55F517A11AD2EA65009D06EC /* NewMaintenanceItemViewController.swift */,
 				55F5178B1AD2E77B009D06EC /* ScheduleViewController.swift */,
 				55F5178D1AD2E7A8009D06EC /* NetData.swift */,
@@ -270,6 +273,7 @@
 				55F517631AD2E052009D06EC /* Main.storyboard in Resources */,
 				55F517681AD2E052009D06EC /* LaunchScreen.xib in Resources */,
 				55F517651AD2E052009D06EC /* Images.xcassets in Resources */,
+				55B17EDD1AD44A560079E0E0 /* NewEquipmentViewController in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

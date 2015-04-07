@@ -35,6 +35,7 @@ class LayoutVars: UIViewController {
     
     var navAndStatusBarHeight = 64
     var backgroundColor:UIColor = UIColor(hex:0xFFF8E6)
+    var backgroundLight:UIColor = UIColor(hex:0xFFFaF8)
     var buttonBackground:UIColor = UIColor(hex:0xFFFFFF)
     var buttonTint:UIColor = UIColor(hex:0x005100)
     var buttonColor1:UIColor = UIColor(hex:0x005100)
@@ -51,4 +52,18 @@ class LayoutVars: UIViewController {
     
     
     
+}
+
+class PaddedTextField: UITextField {
+    var leftMargin : CGFloat = 10.0
+    override func textRectForBounds(bounds: CGRect) -> CGRect {
+        var newBounds = bounds
+        newBounds.origin.x += leftMargin
+        return newBounds
+    }
+    override func editingRectForBounds(bounds: CGRect) -> CGRect {
+        var newBounds = bounds
+        newBounds.origin.x += leftMargin
+        return newBounds
+    }
 }

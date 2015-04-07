@@ -167,19 +167,11 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.dealerTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.dealerTxtField)
         
-        let mileageToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
-        var mileageItems = [AnyObject]()
-        //making done button
-        let mnextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "mnextPressed")
-        mileageItems.append(mnextButton)
-        mileageToolbar.barStyle = UIBarStyle.Black
-        mileageToolbar.setItems(mileageItems, animated: true)
         self.mileageTxtField = PaddedTextField()
         self.mileageTxtField.returnKeyType = UIReturnKeyType.Next
         self.mileageTxtField.backgroundColor = UIColor.whiteColor()
         self.mileageTxtField.delegate = self
         self.mileageTxtField.tag = 5
-        self.mileageTxtField.inputAccessoryView = mileageToolbar
         self.mileageTxtField.layer.cornerRadius = 4.0
         self.mileageTxtField.keyboardType = UIKeyboardType.NumberPad
         self.mileageTxtField.attributedPlaceholder = NSAttributedString(string:"Mileage",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
@@ -211,8 +203,8 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         let toolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
         var items = [AnyObject]()
         //making done button
-        let nextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "nextPressed")
-        items.append(nextButton)
+        let doneButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "donePressed")
+        items.append(doneButton)
         toolbar.barStyle = UIBarStyle.Black
         toolbar.setItems(items, animated: true)
         
@@ -234,14 +226,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.purchasedTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.purchasedTxtField)
         
-        
-        let crewToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
-        var crewItems = [AnyObject]()
-        //making done button
-        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "donePressed")
-        crewItems.append(doneButton)
-        crewToolbar.barStyle = UIBarStyle.Black
-        crewToolbar.setItems(crewItems, animated: true)
+
         
         self.crewPicker = UIPickerView()
         self.crewPicker.backgroundColor = UIColor.whiteColor()
@@ -254,7 +239,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.crewTxtField.delegate = self
         self.crewTxtField.tag = 9
         self.crewTxtField.inputView = crewPicker
-        self.crewTxtField.inputAccessoryView = crewToolbar
+        self.crewTxtField.inputAccessoryView = toolbar
         self.crewTxtField.layer.cornerRadius = 4.0
         self.crewTxtField.attributedPlaceholder = NSAttributedString(string:"Select Crew / Employee",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.crewTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -525,7 +510,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     
     func textFieldDidBeginEditing(textField: PaddedTextField) {
         println("PLEASE SCROLL")
-        let offset = (textField.frame.origin.y - 150)
+        let offset = (textField.frame.origin.y - 200)
         var scrollPoint : CGPoint = CGPointMake(0, offset)
         self.scrollView.setContentOffset(scrollPoint, animated: true)
         self.activeTextField = textField
@@ -538,7 +523,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     
     func textFieldShouldReturn(textField: PaddedTextField!) -> Bool {
         textField.resignFirstResponder()
-        println("NEXT")
+        println("TAG: \(textField.tag)")
         switch (textField.tag) {
             case makeTxtField.tag:
                 modelTxtField.becomeFirstResponder()
@@ -551,6 +536,9 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
                 break;
             case dealerTxtField.tag:
                 mileageTxtField.becomeFirstResponder()
+                break;
+            case mileageTxtField.tag:
+                engineTxtField.becomeFirstResponder()
                 break;
             case engineTxtField.tag:
                 fuelTxtField.becomeFirstResponder()
@@ -565,12 +553,6 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
                 break;
         }
         return true
-    }
-    
-    func mnextPressed() {
-        println("NEXT")
-        self.mileageTxtField.resignFirstResponder()
-        self.engineTxtField.becomeFirstResponder()
     }
     
     func nextPressed() {
