@@ -5,7 +5,7 @@
 //  Created by Nicholas Digiando on 4/6/15.
 //  Copyright (c) 2015 Nicholas Digiando. All rights reserved.
 //
-
+/*
 import Foundation
 import UIKit
 import Alamofire
@@ -339,3 +339,4 @@ class NewMaintenanceItemViewController: UIViewController, UIImagePickerControlle
     */
     
 }
+*/
