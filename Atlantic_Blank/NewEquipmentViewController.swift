@@ -81,7 +81,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         
         self.scrollView = UIScrollView()
         self.scrollView.delegate = self
-        self.scrollView.contentSize = CGSizeMake(layoutVars.fullWidth, 1500)
+        self.scrollView.contentSize = CGSizeMake(layoutVars.fullWidth, 1000)
         self.view.addSubview(self.scrollView)
         
         // self.containerView = UIView()
@@ -92,7 +92,10 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         //container view for auto layout
         self.containerView = UIView()
         self.containerView.backgroundColor = layoutVars.backgroundColor
-        self.containerView.frame = CGRectMake(0, 0, 500, 2500)
+
+        /*
+self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
+
         self.scrollView.addSubview(self.containerView)
         
         self.tapBtn = UIButton()
