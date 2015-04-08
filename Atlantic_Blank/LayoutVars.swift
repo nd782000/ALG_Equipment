@@ -11,7 +11,7 @@ import Foundation
 
 extension UIColor {
     
-    convenience init(hex: Int) {
+    convenience init(hex: Int, op: CGFloat) {
         
         let components = (
             R: CGFloat((hex >> 16) & 0xff) / 255,
@@ -19,7 +19,7 @@ extension UIColor {
             B: CGFloat((hex >> 00) & 0xff) / 255
         )
         
-        self.init(red: components.R, green: components.G, blue: components.B, alpha: 1)
+        self.init(red: components.R, green: components.G, blue: components.B, alpha: op)
         
     }
     
@@ -34,13 +34,13 @@ class LayoutVars: UIViewController {
     var fullWidth:CGFloat = 0
     
     var navAndStatusBarHeight = 64
-    var backgroundColor:UIColor = UIColor(hex:0xFFF8E6)
-    var backgroundLight:UIColor = UIColor(hex:0xFFFaF8)
-    var buttonBackground:UIColor = UIColor(hex:0xFFFFFF)
-    var buttonTint:UIColor = UIColor(hex:0x005100)
-    var buttonColor1:UIColor = UIColor(hex:0x005100)
-    var buttonTextColor:UIColor = UIColor(hex:0xffffff)
-    var borderColor:CGColor = UIColor(hex:0x005100).CGColor
+    var backgroundColor:UIColor = UIColor(hex:0xFFF8E6, op: 1)
+    var backgroundLight:UIColor = UIColor(hex:0xFFFaF8, op: 1)
+    var buttonBackground:UIColor = UIColor(hex:0xFFFFFF, op: 1)
+    var buttonTint:UIColor = UIColor(hex:0x005100, op: 1)
+    var buttonColor1:UIColor = UIColor(hex:0x005100, op: 1)
+    var buttonTextColor:UIColor = UIColor(hex:0xffffff, op: 1)
+    var borderColor:CGColor = UIColor(hex:0x005100, op: 1).CGColor
     var buttonFont:UIFont = UIFont(name: "Helvetica", size: 20)!
     
     override func viewDidLoad() {
@@ -55,7 +55,27 @@ class LayoutVars: UIViewController {
 }
 
 class PaddedTextField: UITextField {
+    override init()
+    {
+        super.init()
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor(hex:0x005100, op: 0.2).CGColor
+        self.layer.cornerRadius = 4.0
+        self.backgroundColor = UIColor(hex:0xFFFFFF, op: 0.8)
+        self.returnKeyType = UIReturnKeyType.Next
+    }
+    
+    override init(frame:CGRect)
+    {
+        super.init(frame:frame)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     var leftMargin : CGFloat = 10.0
+    
     override func textRectForBounds(bounds: CGRect) -> CGRect {
         var newBounds = bounds
         newBounds.origin.x += leftMargin

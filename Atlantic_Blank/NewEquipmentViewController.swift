@@ -26,7 +26,8 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     var layoutVars:LayoutVars = LayoutVars()
     //var customerLbl:UILabel = UILabel()
     var typeValue:String!
-    var typePicker :UIPickerView!
+    var typePicker: UIPickerView!
+    var typeTxtField: PaddedTextField!
     var makeTxtField: PaddedTextField!
     var modelTxtField: PaddedTextField!
     var serialTxtField: PaddedTextField!
@@ -120,16 +121,31 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         navigationItem.rightBarButtonItem = cameraButton
         self.picker.delegate = self
         
+        let typeToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
+        var typeItems = [AnyObject]()
+        //making done button
+        let tnextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "tnextPressed")
+        tnextButton
+        typeItems.append(tnextButton)
+        typeToolbar.barStyle = UIBarStyle.Black
+        typeToolbar.setItems(typeItems, animated: true)
+        
         self.typePicker = UIPickerView()
-        self.typePicker.backgroundColor = UIColor.whiteColor()
-        self.typePicker.layer.cornerRadius = 4.0
         self.typePicker.delegate = self
         self.typePicker.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.containerView.addSubview(self.typePicker)
+        self.typeTxtField = PaddedTextField()
+        self.typeTxtField.delegate = self
+        self.typeTxtField.tag = 9
+        self.typeTxtField.inputView = typePicker
+        self.typeTxtField.inputAccessoryView = typeToolbar
+        self.typeTxtField.attributedPlaceholder = NSAttributedString(string:"Equipment Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
+        self.typeTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.containerView.addSubview(self.typeTxtField)
+        
+
+        self.containerView.addSubview(self.typeTxtField)
         
         self.makeTxtField = PaddedTextField()
-        self.makeTxtField.returnKeyType = UIReturnKeyType.Next
-        self.makeTxtField.backgroundColor = UIColor.whiteColor()
         self.makeTxtField.delegate = self
         self.makeTxtField.tag = 1
         self.makeTxtField.attributedPlaceholder = NSAttributedString(string:"Make",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
@@ -137,32 +153,23 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.containerView.addSubview(self.makeTxtField)
         
         self.modelTxtField = PaddedTextField()
-        self.modelTxtField.returnKeyType = UIReturnKeyType.Next
-        self.modelTxtField.backgroundColor = UIColor.whiteColor()
         self.modelTxtField.delegate = self
         self.modelTxtField.tag = 2
-        self.modelTxtField.layer.cornerRadius = 4.0
         self.modelTxtField.attributedPlaceholder = NSAttributedString(string:"Model",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.modelTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.modelTxtField)
         
         self.serialTxtField = PaddedTextField()
-        self.serialTxtField.returnKeyType = UIReturnKeyType.Next
-        self.serialTxtField.backgroundColor = UIColor.whiteColor()
         self.serialTxtField.delegate = self
         self.serialTxtField.tag = 3
-        self.serialTxtField.layer.cornerRadius = 4.0
         self.serialTxtField.attributedPlaceholder = NSAttributedString(string:"Serial",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.serialTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.serialTxtField)
         
         
         self.dealerTxtField = PaddedTextField()
-        self.dealerTxtField.returnKeyType = UIReturnKeyType.Next
-        self.dealerTxtField.backgroundColor = UIColor.whiteColor()
         self.dealerTxtField.delegate = self
         self.dealerTxtField.tag = 4
-        self.dealerTxtField.layer.cornerRadius = 4.0
         self.dealerTxtField.attributedPlaceholder = NSAttributedString(string:"Dealer",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.dealerTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.dealerTxtField)
@@ -175,33 +182,24 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         mileageToolbar.barStyle = UIBarStyle.Black
         mileageToolbar.setItems(mileageItems, animated: true)
         self.mileageTxtField = PaddedTextField()
-        self.mileageTxtField.returnKeyType = UIReturnKeyType.Next
-        self.mileageTxtField.backgroundColor = UIColor.whiteColor()
         self.mileageTxtField.delegate = self
         self.mileageTxtField.tag = 5
         self.mileageTxtField.inputAccessoryView = mileageToolbar
-        self.mileageTxtField.layer.cornerRadius = 4.0
         self.mileageTxtField.keyboardType = UIKeyboardType.NumberPad
         self.mileageTxtField.attributedPlaceholder = NSAttributedString(string:"Mileage",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.mileageTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.mileageTxtField)
         
         self.engineTxtField = PaddedTextField()
-        self.engineTxtField.returnKeyType = UIReturnKeyType.Next
-        self.engineTxtField.backgroundColor = UIColor.whiteColor()
         self.engineTxtField.delegate = self
         self.engineTxtField.tag = 6
-        self.engineTxtField.layer.cornerRadius = 4.0
         self.engineTxtField.attributedPlaceholder = NSAttributedString(string:"Engine Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.engineTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.engineTxtField)
         
         self.fuelTxtField = PaddedTextField()
-        self.fuelTxtField.returnKeyType = UIReturnKeyType.Next
-        self.fuelTxtField.backgroundColor = UIColor.whiteColor()
         self.fuelTxtField.delegate = self
         self.fuelTxtField.tag = 7
-        self.fuelTxtField.layer.cornerRadius = 4.0
         self.fuelTxtField.attributedPlaceholder = NSAttributedString(string:"Fuel Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.fuelTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.fuelTxtField)
@@ -223,13 +221,10 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         dateFormatter.dateFormat = "MM/dd/yyyy"
         
         self.purchasedTxtField = PaddedTextField()
-        self.purchasedTxtField.returnKeyType = UIReturnKeyType.Next
-        self.purchasedTxtField.backgroundColor = UIColor.whiteColor()
         self.purchasedTxtField.delegate = self
         self.purchasedTxtField.tag = 8
         self.purchasedTxtField.inputView = self.DatePickerView
         self.purchasedTxtField.inputAccessoryView = toolbar
-        self.purchasedTxtField.layer.cornerRadius = 4.0
         self.purchasedTxtField.attributedPlaceholder = NSAttributedString(string:"Purchased Date",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.purchasedTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.purchasedTxtField)
@@ -244,18 +239,13 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         crewToolbar.setItems(crewItems, animated: true)
         
         self.crewPicker = UIPickerView()
-        self.crewPicker.backgroundColor = UIColor.whiteColor()
-        self.crewPicker.layer.cornerRadius = 4.0
         self.crewPicker.delegate = self
         self.crewPicker.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.crewTxtField = PaddedTextField()
-        self.crewTxtField.returnKeyType = UIReturnKeyType.Next
-        self.crewTxtField.backgroundColor = UIColor.whiteColor()
         self.crewTxtField.delegate = self
         self.crewTxtField.tag = 9
         self.crewTxtField.inputView = crewPicker
         self.crewTxtField.inputAccessoryView = crewToolbar
-        self.crewTxtField.layer.cornerRadius = 4.0
         self.crewTxtField.attributedPlaceholder = NSAttributedString(string:"Select Crew / Employee",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.crewTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.crewTxtField)
@@ -303,7 +293,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         
         //auto layout group
         let viewsDictionary = [
-            "view1":self.typePicker,
+            "view1":self.typeTxtField,
             "view3":self.makeTxtField,
             "view4":self.modelTxtField,
             "view5":self.serialTxtField,
@@ -319,14 +309,14 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
             "view15":self.submitEquipmentButton
         ]
         
-        let metricsDictionary = ["fullWidth": self.view.frame.size.width - 100,"btnHeight":40]
+        let metricsDictionary = ["fullWidth": self.view.frame.size.width - 30,"btnHeight":40]
         
         ///////////////   size constraints   ////////////////////////////////////////////
         
-        let typePickerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let typePickerConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view1(162)]", options: nil, metrics: nil, views: viewsDictionary)
-        self.typePicker.addConstraints(typePickerConstraint_H)
-        self.typePicker.addConstraints(typePickerConstraint_V)
+        let typeConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
+        let typeConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view1(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
+        self.typeTxtField.addConstraints(typeConstraint_H)
+        self.typeTxtField.addConstraints(typeConstraint_V)
         
 
         let makeConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
@@ -400,8 +390,8 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         
         //////////////   auto layout position constraints   /////////////////////////////
         
-        let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-50-[view1]", options: nil, metrics: nil, views: viewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[view1]-20-[view3]-20-[view4]-20-[view5]-20-[view6]-20-[view7]-20-[view8]-20-[view9]-20-[view10]-20-[view11]-20-[view12]-3-[view13]-8-[view14]-10-[view15]", options:  NSLayoutFormatOptions.AlignAllLeft, metrics: nil, views: viewsDictionary)
+        let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view1]", options: nil, metrics: nil, views: viewsDictionary)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[view1]-15-[view3]-15-[view4]-15-[view5]-15-[view6]-15-[view7]-15-[view8]-15-[view9]-15-[view10]-15-[view11]-15-[view12]-3-[view13]-8-[view14]-10-[view15]", options:  NSLayoutFormatOptions.AlignAllLeft, metrics: nil, views: viewsDictionary)
         
         self.containerView.addConstraints(viewsConstraint_H)
         self.containerView.addConstraints(viewsConstraint_V)
@@ -466,6 +456,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         
         if (pickerView == typePicker) {
             self.typeValue=self.eTypes[row]
+            self.typeTxtField.text=self.eTypes[row]
             println("values:----------\(self.typeValue)");
         }else{
             self.crewValue=self.crew[row]
@@ -522,7 +513,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     
     func textFieldDidBeginEditing(textField: PaddedTextField) {
         println("PLEASE SCROLL")
-        let offset = (textField.frame.origin.y - 150)
+        let offset = (textField.frame.origin.y - 79)
         var scrollPoint : CGPoint = CGPointMake(0, offset)
         self.scrollView.setContentOffset(scrollPoint, animated: true)
         self.activeTextField = textField
@@ -562,6 +553,12 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
                 break;
         }
         return true
+    }
+   
+    func tnextPressed() {
+        println("NEXT")
+        self.typeTxtField.resignFirstResponder()
+        self.makeTxtField.becomeFirstResponder()
     }
     
     func mnextPressed() {
