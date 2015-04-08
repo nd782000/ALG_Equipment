@@ -55,7 +55,7 @@ class PaddedTextField: UITextField {
         super.init()
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor(hex:0x005100, op: 0.2).CGColor
-        self.layer.cornerRadius = 4.0
+        self.layer.cornerRadius = 5.0
         self.backgroundColor = UIColor(hex:0xFFFFFF, op: 0.8)
         var inputFont:UIFont = UIFont(name: "Avenir Next", size: 16)!
         self.font = inputFont
@@ -87,3 +87,4 @@ class PaddedTextField: UITextField {
     }
 }
 
+Hello
