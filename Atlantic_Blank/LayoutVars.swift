@@ -41,18 +41,12 @@ class LayoutVars: UIViewController {
     var buttonColor1:UIColor = UIColor(hex:0x005100, op: 1)
     var buttonTextColor:UIColor = UIColor(hex:0xffffff, op: 1)
     var borderColor:CGColor = UIColor(hex:0x005100, op: 1).CGColor
-    var buttonFont:UIFont = UIFont(name: "Helvetica", size: 20)!
+    var buttonFont:UIFont = UIFont(name: "Helvetica Neue", size: 18)!
     var inputHeight = 50
     
     override func viewDidLoad() {
         self.fullWidth = self.view.frame.size.width
     }
-    
-    
-    
-    
-    
-    
 }
 
 class PaddedTextField: UITextField {
@@ -63,7 +57,11 @@ class PaddedTextField: UITextField {
         self.layer.borderColor = UIColor(hex:0x005100, op: 0.2).CGColor
         self.layer.cornerRadius = 4.0
         self.backgroundColor = UIColor(hex:0xFFFFFF, op: 0.8)
+        var inputFont:UIFont = UIFont(name: "Avenir Next", size: 16)!
+        self.font = inputFont
         self.returnKeyType = UIReturnKeyType.Next
+        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.frame.size.height = 40
     }
     
     override init(frame:CGRect)
@@ -88,3 +86,4 @@ class PaddedTextField: UITextField {
         return newBounds
     }
 }
+

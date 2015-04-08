@@ -22,9 +22,9 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     var tapBtn:UIButton!
     var loadingView:UIView!
     
+    let screenSize: CGRect = UIScreen.mainScreen().bounds
     
     var layoutVars:LayoutVars = LayoutVars()
-    //var customerLbl:UILabel = UILabel()
     var typeValue:String!
     var typePicker: UIPickerView!
     var typeTxtField: PaddedTextField!
@@ -139,7 +139,6 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.typeTxtField.inputView = typePicker
         self.typeTxtField.inputAccessoryView = typeToolbar
         self.typeTxtField.attributedPlaceholder = NSAttributedString(string:"Equipment Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.typeTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.typeTxtField)
         
 
@@ -149,21 +148,18 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.makeTxtField.delegate = self
         self.makeTxtField.tag = 1
         self.makeTxtField.attributedPlaceholder = NSAttributedString(string:"Make",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.makeTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.makeTxtField)
         
         self.modelTxtField = PaddedTextField()
         self.modelTxtField.delegate = self
         self.modelTxtField.tag = 2
         self.modelTxtField.attributedPlaceholder = NSAttributedString(string:"Model",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.modelTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.modelTxtField)
         
         self.serialTxtField = PaddedTextField()
         self.serialTxtField.delegate = self
         self.serialTxtField.tag = 3
         self.serialTxtField.attributedPlaceholder = NSAttributedString(string:"Serial",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.serialTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.serialTxtField)
         
         
@@ -171,7 +167,6 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.dealerTxtField.delegate = self
         self.dealerTxtField.tag = 4
         self.dealerTxtField.attributedPlaceholder = NSAttributedString(string:"Dealer",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.dealerTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.dealerTxtField)
         
         let mileageToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
@@ -187,21 +182,18 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.mileageTxtField.inputAccessoryView = mileageToolbar
         self.mileageTxtField.keyboardType = UIKeyboardType.NumberPad
         self.mileageTxtField.attributedPlaceholder = NSAttributedString(string:"Mileage",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.mileageTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.mileageTxtField)
         
         self.engineTxtField = PaddedTextField()
         self.engineTxtField.delegate = self
         self.engineTxtField.tag = 6
         self.engineTxtField.attributedPlaceholder = NSAttributedString(string:"Engine Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.engineTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.engineTxtField)
         
         self.fuelTxtField = PaddedTextField()
         self.fuelTxtField.delegate = self
         self.fuelTxtField.tag = 7
         self.fuelTxtField.attributedPlaceholder = NSAttributedString(string:"Fuel Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.fuelTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.fuelTxtField)
 
         DatePickerView.datePickerMode = UIDatePickerMode.Date
@@ -226,7 +218,6 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.purchasedTxtField.inputView = self.DatePickerView
         self.purchasedTxtField.inputAccessoryView = toolbar
         self.purchasedTxtField.attributedPlaceholder = NSAttributedString(string:"Purchased Date",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.purchasedTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.purchasedTxtField)
         
         
@@ -240,14 +231,12 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         
         self.crewPicker = UIPickerView()
         self.crewPicker.delegate = self
-        self.crewPicker.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.crewTxtField = PaddedTextField()
         self.crewTxtField.delegate = self
         self.crewTxtField.tag = 9
         self.crewTxtField.inputView = crewPicker
         self.crewTxtField.inputAccessoryView = crewToolbar
         self.crewTxtField.attributedPlaceholder = NSAttributedString(string:"Select Crew / Employee",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.crewTxtField.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.crewTxtField)
         
         
@@ -294,120 +283,55 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         //auto layout group
         let viewsDictionary = [
             "view1":self.typeTxtField,
-            "view3":self.makeTxtField,
-            "view4":self.modelTxtField,
-            "view5":self.serialTxtField,
-            "view6":self.dealerTxtField,
-            "view7":self.mileageTxtField,
-            "view8":self.engineTxtField,
-            "view9":self.fuelTxtField,
-            "view10":self.purchasedTxtField,
-            "view11":self.crewTxtField,
-            "view12":self.imageView,
-            "view13":self.progressView,
-            "view14":self.progressLbl,
-            "view15":self.submitEquipmentButton
+            "view2":self.makeTxtField,
+            "view3":self.modelTxtField,
+            "view4":self.serialTxtField,
+            "view5":self.dealerTxtField,
+            "view6":self.mileageTxtField,
+            "view7":self.engineTxtField,
+            "view8":self.fuelTxtField,
+            "view9":self.purchasedTxtField,
+            "view10":self.crewTxtField,
+            "view11":self.imageView,
+            "view12":self.progressView,
+            "view13":self.progressLbl,
+            "view14":self.submitEquipmentButton
         ]
         
-        let metricsDictionary = ["fullWidth": self.view.frame.size.width - 30,"btnHeight":40]
-        
-        ///////////////   size constraints   ////////////////////////////////////////////
-        
-        let typeConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let typeConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view1(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.typeTxtField.addConstraints(typeConstraint_H)
-        self.typeTxtField.addConstraints(typeConstraint_V)
-        
-
-        let makeConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let makeConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view3(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.makeTxtField.addConstraints(makeConstraint_H)
-        self.makeTxtField.addConstraints(makeConstraint_V)
-        
-        let modelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let modelConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view4(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.modelTxtField.addConstraints(modelConstraint_H)
-        self.modelTxtField.addConstraints(modelConstraint_V)
-        
-        let serialConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let serialConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view5(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.serialTxtField.addConstraints(serialConstraint_H)
-        self.serialTxtField.addConstraints(serialConstraint_V)
-        
-        let dealerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let dealerConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view6(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.dealerTxtField.addConstraints(dealerConstraint_H)
-        self.dealerTxtField.addConstraints(dealerConstraint_V)
-        
-        let mileageConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let mileageConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view7(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.mileageTxtField.addConstraints(mileageConstraint_H)
-        self.mileageTxtField.addConstraints(mileageConstraint_V)
-        
-        let engineConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view8(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let engineConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view8(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.engineTxtField.addConstraints(engineConstraint_H)
-        self.engineTxtField.addConstraints(engineConstraint_V)
-        
-        let fuelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view9(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let fuelConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view9(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.fuelTxtField.addConstraints(fuelConstraint_H)
-        self.fuelTxtField.addConstraints(fuelConstraint_V)
-        
-        let purchasedConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view10(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let purchasedConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view10(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.purchasedTxtField.addConstraints(purchasedConstraint_H)
-        self.purchasedTxtField.addConstraints(purchasedConstraint_V)
-        
-        let crewConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view11(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let crewConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view11(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.crewTxtField.addConstraints(crewConstraint_H)
-        self.crewTxtField.addConstraints(crewConstraint_V)
-
-        
-        
-        let imageConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view12(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let imageConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view12(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.imageView.addConstraints(imageConstraint_H)
-        self.imageView.addConstraints(imageConstraint_V)
-        
-        let progressConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view13(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let progressConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view13(5)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.progressView.addConstraints(progressConstraint_H)
-        self.progressView.addConstraints(progressConstraint_V)
-        
-        let progressLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view14(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let progressLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view14(30)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.progressLbl.addConstraints(progressLblConstraint_H)
-        self.progressLbl.addConstraints(progressLblConstraint_V)
-        
-        let submitConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view15(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        let submitConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view15(btnHeight)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
-        self.submitEquipmentButton.addConstraints(submitConstraint_H)
-        self.submitEquipmentButton.addConstraints(submitConstraint_V)
-        
-        
+        let sizeVals = ["width": screenSize.width - 30,"height": 40]
         
         //////////////   auto layout position constraints   /////////////////////////////
         
-        let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view1]", options: nil, metrics: nil, views: viewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[view1]-15-[view3]-15-[view4]-15-[view5]-15-[view6]-15-[view7]-15-[view8]-15-[view9]-15-[view10]-15-[view11]-15-[view12]-3-[view13]-8-[view14]-10-[view15]", options:  NSLayoutFormatOptions.AlignAllLeft, metrics: nil, views: viewsDictionary)
+        let viewsConstraint_H1:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view1(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H2:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view2(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H3:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view3(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H4:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view4(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H5:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view5(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H6:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view6(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H7:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view7(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H8:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view8(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H9:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view9(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H10:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view10(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H11:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view11(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H12:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view12(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H13:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view13(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H14:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view14(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[view1(height)]-15-[view2(height)]-15-[view3(height)]-15-[view4(height)]-15-[view5(height)]-15-[view6(height)]-15-[view7(height)]-15-[view8(height)]-15-[view9(height)]-15-[view10(height)]-15-[view11(width)]-3-[view12(height)]-8-[view13(height)]-10-[view14(height)]", options: nil, metrics: sizeVals, views: viewsDictionary)
         
-        self.containerView.addConstraints(viewsConstraint_H)
+        self.containerView.addConstraints(viewsConstraint_H1)
+        self.containerView.addConstraints(viewsConstraint_H2)
+        self.containerView.addConstraints(viewsConstraint_H3)
+        self.containerView.addConstraints(viewsConstraint_H4)
+        self.containerView.addConstraints(viewsConstraint_H5)
+        self.containerView.addConstraints(viewsConstraint_H6)
+        self.containerView.addConstraints(viewsConstraint_H7)
+        self.containerView.addConstraints(viewsConstraint_H8)
+        self.containerView.addConstraints(viewsConstraint_H9)
+        self.containerView.addConstraints(viewsConstraint_H10)
+        self.containerView.addConstraints(viewsConstraint_H11)
+        self.containerView.addConstraints(viewsConstraint_H12)
+        self.containerView.addConstraints(viewsConstraint_H13)
         self.containerView.addConstraints(viewsConstraint_V)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
     
     override func viewDidLayoutSubviews() {
