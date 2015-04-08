@@ -42,6 +42,7 @@ class LayoutVars: UIViewController {
     var buttonTextColor:UIColor = UIColor(hex:0xffffff, op: 1)
     var borderColor:CGColor = UIColor(hex:0x005100, op: 1).CGColor
     var buttonFont:UIFont = UIFont(name: "Helvetica", size: 20)!
+    var inputHeight = 50
     
     override func viewDidLoad() {
         self.fullWidth = self.view.frame.size.width

@@ -154,7 +154,7 @@ class ScheduleViewController: ViewController, UITableViewDelegate, UITableViewDa
     
     
     
-    
+   /*
     func displayItem() {
         println("Yo")
         //let itemViewController = ItemViewController()
@@ -167,6 +167,10 @@ class ScheduleViewController: ViewController, UITableViewDelegate, UITableViewDa
         
         
     }
+
+*/
+    
+    
     
     func goBack(){
         navigationController?.popViewControllerAnimated(true)
