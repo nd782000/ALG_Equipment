@@ -25,7 +25,6 @@ extension UIColor {
     
 }
 
-
 class LayoutVars: UIViewController {
     
     //var backgroundColor:UIColor = uicolorFromHex(0xffccff)
