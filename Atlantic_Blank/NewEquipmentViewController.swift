@@ -26,6 +26,8 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     
     var layoutVars:LayoutVars = LayoutVars()
     var typeValue:String!
+    var typeCode:String!
+    var typeID:String!
     var typePicker: Picker!
     var typeTxtField: PaddedTextField!
     var makeTxtField: PaddedTextField!
@@ -57,6 +59,8 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     
     
     var eTypes:[String] = []
+    var eTypeIDs:[String] = []
+    var eTypeCodes:[String] = []
     let crew = ["LC1", "LC2", "LC3", "MS1", "TR1", "TR2", "TR3"]
     
     
@@ -69,8 +73,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
                 //println("TYPES JSON\(data)")
                 if let allTypes = data as? NSArray {
                     for thisType in allTypes {
-                        var typename = thisType["name"] as! String!
-                        self.addType(typename)
+                        self.addType(thisType as! NSDictionary)
                         //println("Type Name: \(typename)");
                     }
                 }
@@ -368,9 +371,13 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         // selected value in Uipickerview in Swift
         
         if (pickerView == typePicker) {
-            self.typeValue=self.eTypes[row]
+            self.typeValue = self.eTypes[row]
+            self.typeID = self.eTypeIDs[row]
+            self.typeCode = self.eTypeCodes[row]
             self.typeTxtField.text=self.eTypes[row]
-            println("values:----------\(self.typeValue)");
+            println("ID: \(self.typeValue)")
+            println("name: \(self.typeID)")
+            println("code: \(self.typeCode)")
         }else{
             self.crewValue=self.crew[row]
             self.crewTxtField.text=self.crew[row]
@@ -510,9 +517,13 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     
     
     
-    func addType(type: String) {
-        eTypes.append(type)
-        println("ADDING TYPE: \(type)")
+    func addType(thisType:NSDictionary!) {
+        var typename = thisType["name"] as! String!
+        eTypes.append(typename)
+        var newtypeID = thisType["ID"] as! String!
+        eTypeIDs.append(newtypeID)
+        var newtypeCode = thisType["code"] as! String!
+        eTypeCodes.append(newtypeCode)
     }
     
     
@@ -609,8 +620,9 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         showLoadingScreen()
         
         var parameters = [
-            "pic"           :NetData(jpegImage: self.imageView.image!, compressionQuanlity: 1.0, filename: "myImage.jpeg"),
-            "type"      :self.typeValue,
+            "pic"       :NetData(jpegImage: self.imageView.image!, compressionQuanlity: 1.0, filename: "myImage.jpeg"),
+            "type"      :self.typeID,
+            "typeCode"  :self.typeCode,
             "make"      :self.makeTxtField.text,
             "model"     :self.modelTxtField.text,
             "serial"    :self.serialTxtField.text,
@@ -624,8 +636,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         ]
         
         
-        var otherParam: AnyObject? = parameters["otherParm"]
-        println("parameters = \(otherParam)")
+        println("parameters = \(parameters)")
         
         let urlRequest = self.urlRequestWithComponents("http://www.atlanticlawnandgarden.com/cp/functions/new/equipment.php", parameters: parameters)
         
