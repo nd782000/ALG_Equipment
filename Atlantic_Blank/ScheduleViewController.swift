@@ -97,9 +97,9 @@ class ScheduleViewController: ViewController, UITableViewDelegate, UITableViewDa
         let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-74-[view1(40)]-10-[view2(height)]", options:NSLayoutFormatOptions.AlignAllLeft, metrics: sizeVals, views: viewsDictionary)
         
         
-        self.view.addConstraints(tableConstraint_H)
-        self.view.addConstraints(viewsConstraint_H)
-        self.view.addConstraints(viewsConstraint_V)
+        self.view.addConstraints(tableConstraint_H as [AnyObject])
+        self.view.addConstraints(viewsConstraint_H as [AnyObject])
+        self.view.addConstraints(viewsConstraint_V as [AnyObject])
         
 
     }
@@ -139,13 +139,13 @@ class ScheduleViewController: ViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
         
-        var cell:ScheduleTableViewCell = scheduleTableView.dequeueReusableCellWithIdentifier("cell") as ScheduleTableViewCell
+        var cell:ScheduleTableViewCell = scheduleTableView.dequeueReusableCellWithIdentifier("cell") as! ScheduleTableViewCell
        // if is_searching == true{
            // cell.equipName.text = searchingDataArray[indexPath.row] as NSString
            // cell.equipDescription.text = "\(indexPath.row)"
        // }else{
             // if self.history == true{
-                cell.equipName.text = self.itemArray[indexPath.row] as NSString
+                cell.equipName.text = self.itemArray[indexPath.row] as! NSString as String
                 cell.equipDescription.text = "\(indexPath.row)"
             // }else{
                // cell.equipName.text = self.scheduleArray[indexPath.row] as NSString

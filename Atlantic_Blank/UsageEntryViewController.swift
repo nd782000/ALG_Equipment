@@ -53,7 +53,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let itemArray = ["Regular Maintenance","Oil Filter","Spark Plug","Air Filter","Fuel Filter","Blades","Belts","Tires"]
     
-    override init(){
+    init(){
         super.init(nibName:nil,bundle:nil)
         //  println("init equipId = \(equipId) equipName = \(equipName)")
         title = "WorkOrder"
@@ -74,7 +74,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         //title = "Equipment Item"
         
         //custom back button
-        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         backButton.addTarget(self, action: "goBack", forControlEvents: UIControlEvents.TouchUpInside)
         backButton.setTitle("Back", forState: UIControlState.Normal)
         backButton.titleLabel!.font =  layoutVars.buttonFont
@@ -123,7 +123,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
     func layoutViews(){
         
         
-        var editButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var editButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         editButton.addTarget(self, action: "enterEditMode", forControlEvents: UIControlEvents.TouchUpInside)
         editButton.setTitle("Edit", forState: UIControlState.Normal)
         editButton.titleLabel!.font =  layoutVars.buttonFont
@@ -134,7 +134,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         //name
         
-        self.nameLbl = Label(titleText: "Work Order Name")
+        self.nameLbl = Label(text: "Work Order Name")
         self.containerView.addSubview(self.nameLbl)
         
         /*
@@ -144,28 +144,28 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         self.nameValueLbl.setTranslatesAutoresizingMaskIntoConstraints(false)//for autolayout
         self.containerView.addSubview(self.nameValueLbl)
         */
-        self.nameValueLbl = Label(titleText: "Name Value")
+        self.nameValueLbl = Label(text: "Name Value")
         self.containerView.addSubview(self.nameValueLbl)
         
         //status
         
-        self.statusLbl = Label(titleText: "Work Order Status")
+        self.statusLbl = Label(text: "Work Order Status")
         self.containerView.addSubview(self.statusLbl)
         
-        self.statusValueLbl = Label(titleText:"Status Value" )
+        self.statusValueLbl = Label(text:"Status Value" )
         self.containerView.addSubview(self.statusValueLbl)
         
         //date
         
-        self.dateLbl = Label(titleText: "Work Order Date")
+        self.dateLbl = Label(text: "Work Order Date")
         self.containerView.addSubview(self.dateLbl)
         
-        self.dateValueLbl = Label(titleText: "Date Value")
+        self.dateValueLbl = Label(text: "Date Value")
         self.containerView.addSubview(self.dateValueLbl)
         
         //items
         
-        self.itemsLbl = Label(titleText: "Work Order Items")
+        self.itemsLbl = Label(text: "Work Order Items")
         self.containerView.addSubview(self.itemsLbl)
         
         
@@ -194,30 +194,30 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
         //size constraint
-        let nameLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        let nameLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
         
-        self.nameLbl.addConstraints(nameLabelConstraint_H)
+        self.nameLbl.addConstraints(nameLabelConstraint_H as [AnyObject])
         
-        let nameValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.nameValueLbl.addConstraints(nameValueConstraint_H)
+        let nameValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.nameValueLbl.addConstraints(nameValueConstraint_H as [AnyObject])
         
-        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.statusLbl.addConstraints(statusLabelConstraint_H)
+        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.statusLbl.addConstraints(statusLabelConstraint_H as [AnyObject])
         
-        let statusValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.statusValueLbl.addConstraints(statusValueConstraint_H)
+        let statusValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.statusValueLbl.addConstraints(statusValueConstraint_H as [AnyObject])
         
-        let dateLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.dateLbl.addConstraints(dateLabelConstraint_H)
+        let dateLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.dateLbl.addConstraints(dateLabelConstraint_H as [AnyObject])
         
-        let dateValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.dateValueLbl.addConstraints(dateValueConstraint_H)
+        let dateValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.dateValueLbl.addConstraints(dateValueConstraint_H as [AnyObject])
         
-        let itemsLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.itemsLbl.addConstraints(itemsLabelConstraint_H)
+        let itemsLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.itemsLbl.addConstraints(itemsLabelConstraint_H as [AnyObject])
         
-        let itemsTableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view8(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.itemsTableView.addConstraints(itemsTableConstraint_H)
+        let itemsTableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view8(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.itemsTableView.addConstraints(itemsTableConstraint_H as [AnyObject])
         
         
         
@@ -225,11 +225,11 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         //auto layout position constraints
         let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]", options: nil, metrics: nil, views: viewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]-[view7(20)]-[view8(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]-[view7(20)]-[view8(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
         
         
-        self.containerView.addConstraints(viewsConstraint_H)
-        self.containerView.addConstraints(viewsConstraint_V)
+        self.containerView.addConstraints(viewsConstraint_H as [AnyObject])
+        self.containerView.addConstraints(viewsConstraint_V as [AnyObject])
         
     }
     
@@ -253,7 +253,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
     //layout for edit mode
     func layoutEditViews(){
         
-        var doneEditingButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var doneEditingButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         doneEditingButton.addTarget(self, action: "exitEditMode", forControlEvents: UIControlEvents.TouchUpInside)
         doneEditingButton.setTitle("Done", forState: UIControlState.Normal)
         doneEditingButton.titleLabel!.font =  layoutVars.buttonFont
@@ -271,7 +271,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
         
-        self.nameLbl = Label(titleText: "Work Order Name")
+        self.nameLbl = Label(text: "Work Order Name")
         self.containerView.addSubview(self.nameLbl)
         
         
@@ -279,7 +279,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         self.nameTxtField.attributedPlaceholder = NSAttributedString(string:"Name",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.containerView.addSubview(self.nameTxtField)
         
-        self.statusLbl = Label(titleText: "Work Order Status")
+        self.statusLbl = Label(text: "Work Order Status")
         self.containerView.addSubview(self.statusLbl)
         
         self.statusPicker = Picker()
@@ -291,7 +291,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         let nextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "nextPressed")
         items.append(nextButton)
         // Setup the buttons to be put in the system.
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("endEditingNow") )
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("endEditingNow") )
         items.append(doneButton)
         toolbar.barStyle = UIBarStyle.Black
         toolbar.setItems(items, animated: true)
@@ -307,7 +307,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
         
-        self.dateLbl = Label(titleText: "Work Order Date")
+        self.dateLbl = Label(text: "Work Order Date")
         self.containerView.addSubview(self.dateLbl)
         
         
@@ -333,7 +333,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         //items table
         
-        self.itemsLbl = Label(titleText: "Work Order Items")
+        self.itemsLbl = Label(text: "Work Order Items")
         self.containerView.addSubview(self.itemsLbl)
         
         self.itemsTableView  =   TableView()
@@ -363,29 +363,29 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         let metricsDictionary = ["fullWidth": self.view.frame.size.width - 20,"inputHeight":layoutVars.inputHeight]
         
         //size constraint
-        let nameLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.nameLbl.addConstraints(nameLabelConstraint_H)
+        let nameLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.nameLbl.addConstraints(nameLabelConstraint_H as [AnyObject])
         
-        let nameValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.nameTxtField.addConstraints(nameValueConstraint_H)
+        let nameValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.nameTxtField.addConstraints(nameValueConstraint_H as [AnyObject])
         
-        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.statusLbl.addConstraints(statusLabelConstraint_H)
+        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.statusLbl.addConstraints(statusLabelConstraint_H as [AnyObject])
         
-        let statusValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.statusTxtField.addConstraints(statusValueConstraint_H)
+        let statusValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.statusTxtField.addConstraints(statusValueConstraint_H as [AnyObject])
         
-        let dateLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.dateLbl.addConstraints(dateLabelConstraint_H)
+        let dateLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.dateLbl.addConstraints(dateLabelConstraint_H as [AnyObject])
         
-        let dateValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.dateTxtField.addConstraints(dateValueConstraint_H)
+        let dateValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.dateTxtField.addConstraints(dateValueConstraint_H as [AnyObject])
         
-        let itemsLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.itemsLbl.addConstraints(itemsLabelConstraint_H)
+        let itemsLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.itemsLbl.addConstraints(itemsLabelConstraint_H as [AnyObject])
         
-        let itemsTableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view8(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.itemsTableView.addConstraints(itemsTableConstraint_H)
+        let itemsTableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view8(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.itemsTableView.addConstraints(itemsTableConstraint_H as [AnyObject])
         
         
         
@@ -393,11 +393,11 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         
         //auto layout position constraints
         let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]", options: nil, metrics: nil, views: editViewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]-[view7(20)]-[view8(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]-[view7(20)]-[view8(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
         
         
-        self.containerView.addConstraints(viewsConstraint_H)
-        self.containerView.addConstraints(viewsConstraint_V)
+        self.containerView.addConstraints(viewsConstraint_H as [AnyObject])
+        self.containerView.addConstraints(viewsConstraint_V as [AnyObject])
         
     }
     
@@ -434,11 +434,11 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         return self.statusArray.count
     }
     
-    func pickerView(pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         return self.statusArray[row]
     }
     
-    func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         // typeTxtField.text = "\(self.type[row])"
         self.statusTxtField.text = "\(self.statusArray[row])"
@@ -467,7 +467,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell:UITableViewCell = itemsTableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        var cell:UITableViewCell = itemsTableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         if(editMode == true){
             if(indexPath.row == 0){
                 cell.textLabel?.textColor = UIColor.blueColor()
@@ -518,12 +518,12 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     
-    func textFieldDidBeginEditing(textField: PaddedTextField) {
+    func textFieldDidBeginEditing(textField: UITextField) {
         println("PLEASE SCROLL")
         let offset = (textField.frame.origin.y - 150)
         var scrollPoint : CGPoint = CGPointMake(0, offset)
         self.scrollView.setContentOffset(scrollPoint, animated: true)
-        self.activeTextField = textField
+        self.activeTextField = textField as? PaddedTextField
     }
     
     func textFieldTextDidEndEditing(textField: PaddedTextField) {
@@ -531,17 +531,11 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-    func textFieldShouldReturn(textField: PaddedTextField!) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         println("NEXT")
         return true
     }
-    
-    
-    
-    
-    
-    
     
     
     //Calls this function when the tap is recognized.
@@ -587,29 +581,6 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         //nothing fancy here, just trigger the resign() method to close the keyboard.
         resign()
     }
-    
-    
-    // Clicking away from the keyboard will remove the keyboard.
-    override func touchesBegan(touches: (NSSet!), withEvent event: (UIEvent!)) {
-        self.view.endEditing(true)
-    }
-    
-    // called when 'return' key pressed. return NO to ignore.
-    // Requires having the text fields using the view controller as the delegate.
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
-        
-        // Sends the keyboard away when pressing the "done" button
-        resign()
-        return true
-        
-    }
-    
-    
-    
-    
-    
-    
-    
     
     
 }

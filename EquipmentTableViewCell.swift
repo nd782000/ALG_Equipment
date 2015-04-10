@@ -80,28 +80,28 @@ class EquipmentTableViewCell: UITableViewCell {
         //size constraint
         let statusIconConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(20)]", options: nil, metrics: nil, views: viewsDictionary)
         let statusIconConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view1(20)]", options: nil, metrics: nil, views: viewsDictionary)
-        equipStatusIcon.addConstraints(statusIconConstraint_H)
-        equipStatusIcon.addConstraints(statusIconConstraint_V)
+        equipStatusIcon.addConstraints(statusIconConstraint_H as [AnyObject])
+        equipStatusIcon.addConstraints(statusIconConstraint_V as [AnyObject])
         
         let nameLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(50)]", options: nil, metrics: nil, views: viewsDictionary)
         let nameLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view2(20)]", options: nil, metrics: nil, views: viewsDictionary)
-        nameLbl.addConstraints(nameLblConstraint_H)
-        nameLbl.addConstraints(nameLblConstraint_V)
+        nameLbl.addConstraints(nameLblConstraint_H as [AnyObject])
+        nameLbl.addConstraints(nameLblConstraint_V as [AnyObject])
         
         let typeNameLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(60)]", options: nil, metrics: nil, views: viewsDictionary)
         let typeNameLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view3(20)]", options: nil, metrics: nil, views: viewsDictionary)
-        typeNameLbl.addConstraints(typeNameLblConstraint_H)
-        typeNameLbl.addConstraints(typeNameLblConstraint_V)
+        typeNameLbl.addConstraints(typeNameLblConstraint_H as [AnyObject])
+        typeNameLbl.addConstraints(typeNameLblConstraint_V as [AnyObject])
         
         let makeLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(100)]", options: nil, metrics: nil, views: viewsDictionary)
         let makeLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view4(20)]", options: nil, metrics: nil, views: viewsDictionary)
-        makeLbl.addConstraints(makeLblConstraint_H)
-        makeLbl.addConstraints(makeLblConstraint_V)
+        makeLbl.addConstraints(makeLblConstraint_H as [AnyObject])
+        makeLbl.addConstraints(makeLblConstraint_V as [AnyObject])
         
         let crewLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(50)]", options: nil, metrics: nil, views: viewsDictionary)
         let crewLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view5(20)]", options: nil, metrics: nil, views: viewsDictionary)
-        crewLbl.addConstraints(crewLblConstraint_H)
-        crewLbl.addConstraints(crewLblConstraint_V)
+        crewLbl.addConstraints(crewLblConstraint_H as [AnyObject])
+        crewLbl.addConstraints(crewLblConstraint_V as [AnyObject])
         
         
         
@@ -113,8 +113,8 @@ class EquipmentTableViewCell: UITableViewCell {
         let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]-[view2]-[view3]-[view4]-[view5]-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: nil, views: viewsDictionary)
         
         
-        contentView.addConstraints(viewsConstraint_H)
-        contentView.addConstraints(viewsConstraint_V)
+        contentView.addConstraints(viewsConstraint_H as [AnyObject])
+        contentView.addConstraints(viewsConstraint_V as [AnyObject])
         
     }
     

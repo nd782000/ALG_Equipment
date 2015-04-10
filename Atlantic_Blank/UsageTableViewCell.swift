@@ -19,8 +19,8 @@ class UsageTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         var layoutVars : LayoutVars = LayoutVars()
-        usageNameLbl = Label(titleText: "") // not sure how to refer to the cell size here
-        usageTotalLbl = Label(titleText: "") // not sure how to refer to the cell size here
+        usageNameLbl = Label(text: "") // not sure how to refer to the cell size here
+        usageTotalLbl = Label(text: "") // not sure how to refer to the cell size here
         contentView.addSubview(usageNameLbl)
         contentView.addSubview(usageTotalLbl)
         
@@ -33,12 +33,12 @@ class UsageTableViewCell: UITableViewCell {
         
                //size constraint
         let usageCellConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-5-[view1(125)]-5-[view2(150)]-|", options: nil, metrics: metricsDictionary, views: usageViewsDictionary)
-        contentView.addConstraints(usageCellConstraint_H)
+        contentView.addConstraints(usageCellConstraint_H as [AnyObject])
 
         let usageCellConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-7-[view1(30)]", options: nil, metrics: metricsDictionary, views: usageViewsDictionary)
-        contentView.addConstraints(usageCellConstraint_V)
+        contentView.addConstraints(usageCellConstraint_V as [AnyObject])
         let usageCellConstraint_V2:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-7-[view2(30)]", options: nil, metrics: metricsDictionary, views: usageViewsDictionary)
-        contentView.addConstraints(usageCellConstraint_V2)
+        contentView.addConstraints(usageCellConstraint_V2 as [AnyObject])
         
     }
     

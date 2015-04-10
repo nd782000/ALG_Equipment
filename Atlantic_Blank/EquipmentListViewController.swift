@@ -106,12 +106,12 @@ class EquipmentListViewController: ViewController, UITableViewDelegate, UITableV
         let tableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view2(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
         
         
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-74-[view1(40)]-10-[view2(height)]-10-|", options:NSLayoutFormatOptions.AlignAllLeft, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-74-[view1(40)]-10-[view2]-10-|", options:NSLayoutFormatOptions.AlignAllLeft, metrics: sizeVals, views: viewsDictionary)
         
         
-        self.view.addConstraints(tableConstraint_H)
-        self.view.addConstraints(viewsConstraint_H)
-        self.view.addConstraints(viewsConstraint_V)
+        self.view.addConstraints(tableConstraint_H as [AnyObject])
+        self.view.addConstraints(viewsConstraint_H as [AnyObject])
+        self.view.addConstraints(viewsConstraint_V as [AnyObject])
        
         
         
@@ -166,8 +166,8 @@ class EquipmentListViewController: ViewController, UITableViewDelegate, UITableV
                 */
                 
                 
-                let equipmentInfos = ((JSON as NSDictionary).valueForKey("equipment") as [NSDictionary]).map {
-                    EquipmentInfo(id: $0["ID"] as String, name: $0["name"] as String, typeName: $0["typeName"] as String, make: $0["make"] as String, model: $0["model"] as String, status: $0["status"] as String, crew: $0["crew"] as String, mileage: $0["mileage"] as String, fuel: $0["fuel"] as String, engine: $0["engine"] as String, pic: $0["pic"] as String)
+                let equipmentInfos = ((JSON as! NSDictionary).valueForKey("equipment") as! [NSDictionary]).map {
+                    EquipmentInfo(id: $0["ID"] as! String, name: $0["name"] as! String, typeName: $0["typeName"] as! String, make: $0["make"] as! String, model: $0["model"] as! String, status: $0["status"] as! String, crew: $0["crew"] as! String, mileage: $0["mileage"] as! String, fuel: $0["fuel"] as! String, engine: $0["engine"] as! String, pic: $0["pic"] as! String)
                 }
                 
                 //println("photoInfos = \(equipmentInfos)")
@@ -268,7 +268,7 @@ class EquipmentListViewController: ViewController, UITableViewDelegate, UITableV
             equipmentSet.sortUsingDescriptors([self.sd])
             self.equipmentListTableView.reloadData()
         default:
-            sd = sd.reversedSortDescriptor as NSSortDescriptor
+            sd = sd.reversedSortDescriptor as! NSSortDescriptor
             equipmentSet.sortUsingDescriptors([self.sd])
             self.equipmentListTableView.reloadData()
         }
@@ -284,19 +284,19 @@ class EquipmentListViewController: ViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         //println("tableview.cellForRowAtIndexPath")
-        let id = (self.equipmentSet.objectAtIndex(indexPath.row) as EquipmentInfo).id
-        let status = (self.equipmentSet.objectAtIndex(indexPath.row) as EquipmentInfo).status
-        let name = (self.equipmentSet.objectAtIndex(indexPath.row) as EquipmentInfo).name
-        let typeName = (self.equipmentSet.objectAtIndex(indexPath.row) as EquipmentInfo).typeName
-        let make = (self.equipmentSet.objectAtIndex(indexPath.row) as EquipmentInfo).make
-        let crew = (self.equipmentSet.objectAtIndex(indexPath.row) as EquipmentInfo).crew
+        let id = (self.equipmentSet.objectAtIndex(indexPath.row) as! EquipmentInfo).id
+        let status = (self.equipmentSet.objectAtIndex(indexPath.row) as! EquipmentInfo).status
+        let name = (self.equipmentSet.objectAtIndex(indexPath.row) as! EquipmentInfo).name
+        let typeName = (self.equipmentSet.objectAtIndex(indexPath.row) as! EquipmentInfo).typeName
+        let make = (self.equipmentSet.objectAtIndex(indexPath.row) as! EquipmentInfo).make
+        let crew = (self.equipmentSet.objectAtIndex(indexPath.row) as! EquipmentInfo).crew
         
         //let imageURL = self.equipmentSet.objectAtIndex(indexPath.row) as NSString
         
         
         //println("make = \(make)")
         
-        var cell:EquipmentTableViewCell = equipmentListTableView.dequeueReusableCellWithIdentifier("cell") as EquipmentTableViewCell
+        var cell:EquipmentTableViewCell = equipmentListTableView.dequeueReusableCellWithIdentifier("cell") as! EquipmentTableViewCell
         
         cell.id = id
         cell.setStatus(status)
@@ -318,10 +318,10 @@ class EquipmentListViewController: ViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("You selected cell #\(indexPath.row)!")
-        let id = (self.equipmentSet.objectAtIndex(indexPath.row) as EquipmentInfo).id
+        let id = (self.equipmentSet.objectAtIndex(indexPath.row) as! EquipmentInfo).id
         //displayEquipment()
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        var eq = self.equipmentSet.objectAtIndex(indexPath.row) as EquipmentInfo
+        var eq = self.equipmentSet.objectAtIndex(indexPath.row) as! EquipmentInfo
         println("\(eq)")
         let equipmentViewController = EquipmentViewController(equip: eq)
         navigationController?.pushViewController(equipmentViewController, animated: true )

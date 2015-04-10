@@ -43,7 +43,7 @@ class UsageListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         //custom back button
-        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         backButton.addTarget(self, action: "goBack", forControlEvents: UIControlEvents.TouchUpInside)
         backButton.setTitle("Back", forState: UIControlState.Normal)
         backButton.titleLabel!.font =  layoutVars.buttonFont
@@ -65,7 +65,7 @@ class UsageListViewController: UIViewController, UITableViewDelegate, UITableVie
         self.usageListTableView.registerClass(UsageTableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(self.usageListTableView)
         
-        self.usageTotalLbl = Label(titleText: "Usage Total")
+        self.usageTotalLbl = Label()
         self.view.addSubview(self.usageTotalLbl)
         
         
@@ -79,12 +79,12 @@ class UsageListViewController: UIViewController, UITableViewDelegate, UITableVie
         //size constraint
         
         let usageLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: usageViewsDictionary)
-        self.usageTotalLbl.addConstraints(usageLabelConstraint_H)
+        self.usageTotalLbl.addConstraints(usageLabelConstraint_H as [AnyObject])
 
         let usageTableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1(fullWidth)]-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: usageViewsDictionary)
         let usageTableConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-76-[view1(fullHeight)]-[view2(30)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: usageViewsDictionary)
-        self.view.addConstraints(usageTableConstraint_H)
-        self.view.addConstraints(usageTableConstraint_V)
+        self.view.addConstraints(usageTableConstraint_H as [AnyObject])
+        self.view.addConstraints(usageTableConstraint_V as [AnyObject])
         
     }
     
@@ -104,17 +104,17 @@ class UsageListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell:UsageTableViewCell = usageListTableView.dequeueReusableCellWithIdentifier("cell") as UsageTableViewCell
+        var cell:UsageTableViewCell = usageListTableView.dequeueReusableCellWithIdentifier("cell") as! UsageTableViewCell
         
-        cell.usageNameLbl.text = self.usageNameArray[indexPath.row] as NSString
-        cell.usageTotalLbl.text = self.usageTotalArray[indexPath.row] as NSString
+        cell.usageNameLbl.text = self.usageNameArray[indexPath.row] as! NSString as String
+        cell.usageTotalLbl.text = self.usageTotalArray[indexPath.row] as! NSString as String
         return cell;
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("You selected cell #\(indexPath.row)!")
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        usageName =  self.usageNameArray[indexPath.row] as NSString
+        usageName =  self.usageNameArray[indexPath.row] as! NSString as String
         usageID = String(indexPath.row)
         
     }

@@ -37,7 +37,7 @@ class ItemListViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         //custom back button
-        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         backButton.addTarget(self, action: "goBack", forControlEvents: UIControlEvents.TouchUpInside)
         backButton.setTitle("Back", forState: UIControlState.Normal)
         backButton.titleLabel!.font =  layoutVars.buttonFont
@@ -85,8 +85,8 @@ class ItemListViewController: UIViewController, UITableViewDelegate, UITableView
         //size constraint
         let itemTableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1(fullWidth)]-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: itemViewsDictionary)
         let itemTableConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-76-[view1(fullHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: itemViewsDictionary)
-        self.view.addConstraints(itemTableConstraint_H)
-        self.view.addConstraints(itemTableConstraint_V)
+        self.view.addConstraints(itemTableConstraint_H as [AnyObject])
+        self.view.addConstraints(itemTableConstraint_V as [AnyObject])
         
         
         
@@ -99,9 +99,9 @@ class ItemListViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell:ItemTableViewCell = itemListTableView.dequeueReusableCellWithIdentifier("cell") as ItemTableViewCell
+        var cell:ItemTableViewCell = itemListTableView.dequeueReusableCellWithIdentifier("cell") as! ItemTableViewCell
         
-        cell.itemName.text = self.itemArray[indexPath.row] as NSString
+        cell.itemName.text = self.itemArray[indexPath.row] as! NSString as String
         return cell;
     }
     
@@ -122,7 +122,7 @@ class ItemListViewController: UIViewController, UITableViewDelegate, UITableView
         //checks selected cell
         var newCell = tableView.cellForRowAtIndexPath(indexPath)
         newCell?.accessoryType = .Checkmark
-        itemName =  self.itemArray[indexPath.row] as NSString
+        itemName =  self.itemArray[indexPath.row] as! NSString as String
         itemID = String(indexPath.row)
         
     }

@@ -3,7 +3,7 @@ import Alamofire
 
 
 @objc public protocol ResponseCollectionSerializable {
-    class func collection(#response: NSHTTPURLResponse, representation: AnyObject) -> [Self]
+    static func collection(#response: NSHTTPURLResponse, representation: AnyObject) -> [Self]
 }
 
 extension Alamofire.Request {
@@ -168,18 +168,18 @@ class EquipmentInfo: NSObject, ResponseObjectSerializable  {
     
     required init(response: NSHTTPURLResponse, representation: AnyObject) {
         println("EquipmentInfo init response: \(response)")
-        self.id = representation.valueForKeyPath("equipment.id") as String
+        self.id = representation.valueForKeyPath("equipment.id") as! String
         
-        self.name = representation.valueForKeyPath("equipment.name") as String
-        self.typeName = representation.valueForKeyPath("equipment.typeName") as String
-        self.make = representation.valueForKeyPath("equipment.make") as String
-        self.model = representation.valueForKeyPath("equipment.model") as String
-        self.status = representation.valueForKeyPath("equipment.status") as String
-        self.crew = representation.valueForKeyPath("equipment.crew") as String
-        self.engine = representation.valueForKeyPath("equipment.engine") as String
-        self.fuel = representation.valueForKeyPath("equipment.fuel") as String
-        self.mileage = representation.valueForKeyPath("equipment.mileage") as String
-        self.pic = representation.valueForKeyPath("equipment.pic") as String
+        self.name = representation.valueForKeyPath("equipment.name") as! String
+        self.typeName = representation.valueForKeyPath("equipment.typeName") as! String
+        self.make = representation.valueForKeyPath("equipment.make") as! String
+        self.model = representation.valueForKeyPath("equipment.model") as! String
+        self.status = representation.valueForKeyPath("equipment.status") as! String
+        self.crew = representation.valueForKeyPath("equipment.crew") as! String
+        self.engine = representation.valueForKeyPath("equipment.engine") as! String
+        self.fuel = representation.valueForKeyPath("equipment.fuel") as! String
+        self.mileage = representation.valueForKeyPath("equipment.mileage") as! String
+        self.pic = representation.valueForKeyPath("equipment.pic") as! String
         
         
     }
@@ -187,7 +187,7 @@ class EquipmentInfo: NSObject, ResponseObjectSerializable  {
     
     
     override func isEqual(object: AnyObject!) -> Bool {
-        return (object as EquipmentInfo).id == self.id
+        return (object as! EquipmentInfo).id == self.id
     }
     /*
     override var hash: String {
@@ -197,10 +197,10 @@ class EquipmentInfo: NSObject, ResponseObjectSerializable  {
 }
 
 final class Comment: ResponseCollectionSerializable {
-    class func collection(#response: NSHTTPURLResponse, representation: AnyObject) -> [Comment] {
+    @objc class func collection(#response: NSHTTPURLResponse, representation: AnyObject) -> [Comment] {
         var comments = [Comment]()
         
-        for comment in representation.valueForKeyPath("comments") as [NSDictionary] {
+        for comment in representation.valueForKeyPath("comments") as! [NSDictionary] {
             comments.append(Comment(JSON: comment))
         }
         
@@ -212,8 +212,8 @@ final class Comment: ResponseCollectionSerializable {
     let commentBody: String
     
     init(JSON: AnyObject) {
-        userFullname = JSON.valueForKeyPath("user.fullname") as String
-        userPictureURL = JSON.valueForKeyPath("user.userpic_url") as String
-        commentBody = JSON.valueForKeyPath("body") as String
+        userFullname = JSON.valueForKeyPath("user.fullname") as! String
+        userPictureURL = JSON.valueForKeyPath("user.userpic_url") as! String
+        commentBody = JSON.valueForKeyPath("body") as! String
     }
 }

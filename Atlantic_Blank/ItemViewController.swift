@@ -80,7 +80,7 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         //title = "Equipment Item"
         
         //custom back button
-        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         backButton.addTarget(self, action: "goBack", forControlEvents: UIControlEvents.TouchUpInside)
         backButton.setTitle("Back", forState: UIControlState.Normal)
         backButton.titleLabel!.font =  layoutVars.buttonFont
@@ -141,7 +141,7 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         
         title = "Labor Item"
         
-        var editButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var editButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         editButton.addTarget(self, action: "enterEditMode", forControlEvents: UIControlEvents.TouchUpInside)
         editButton.setTitle("Edit", forState: UIControlState.Normal)
         editButton.titleLabel!.font =  layoutVars.buttonFont
@@ -151,11 +151,11 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         
         //name
         
-        self.typeLbl = Label(titleText: "Item Type")
+        self.typeLbl = Label(text: "Item Type")
         self.containerView.addSubview(self.typeLbl)
         
         
-        self.typeValueLbl = Label(titleText: "Type Value")
+        self.typeValueLbl = Label(text: "Type Value")
         self.containerView.addSubview(self.typeValueLbl)
         
         //description
@@ -165,12 +165,12 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         self.containerView.addSubview(self.descriptionLbl)
         
         
-        self.descriptionValueLbl = Label(titleText: "Item Description")
+        self.descriptionValueLbl = Label(text: "Item Description")
         self.containerView.addSubview(self.descriptionValueLbl)
         
         //status
         
-        self.statusLbl = Label(titleText: "Item Status")
+        self.statusLbl = Label(text: "Item Status")
         self.containerView.addSubview(self.statusLbl)
         
         
@@ -212,25 +212,25 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         let viewsDictionary = ["view1":self.typeLbl,"view2":self.typeValueLbl,"view3":self.descriptionLbl,"view4":self.descriptionValueLbl,"view5":self.statusLbl,"view6":self.statusTxtField,"view7":self.usageButton]
         let metricsDictionary = ["fullWidth": self.view.frame.size.width - 20,"inputHeight":layoutVars.inputHeight]
         //size constraint
-        let typeLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.typeLbl.addConstraints(typeLabelConstraint_H)
-        let typeValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.typeValueLbl.addConstraints(typeValueConstraint_H)
-        let descriptionLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.descriptionLbl.addConstraints(descriptionLabelConstraint_H)
-        let descriptionValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.descriptionValueLbl.addConstraints(descriptionValueConstraint_H)
-        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.statusLbl.addConstraints(statusLabelConstraint_H)
-        let statusPickerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.statusTxtField.addConstraints(statusPickerConstraint_H)
-        let usageButtonConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.usageButton.addConstraints(usageButtonConstraint_H)
+        let typeLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.typeLbl.addConstraints(typeLabelConstraint_H as [AnyObject])
+        let typeValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.typeValueLbl.addConstraints(typeValueConstraint_H as [AnyObject])
+        let descriptionLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.descriptionLbl.addConstraints(descriptionLabelConstraint_H as [AnyObject])
+        let descriptionValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.descriptionValueLbl.addConstraints(descriptionValueConstraint_H as [AnyObject])
+        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.statusLbl.addConstraints(statusLabelConstraint_H as [AnyObject])
+        let statusPickerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.statusTxtField.addConstraints(statusPickerConstraint_H as [AnyObject])
+        let usageButtonConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.usageButton.addConstraints(usageButtonConstraint_H as [AnyObject])
         //auto layout position constraints
         let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]", options: nil, metrics: nil, views: viewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]-[view7(inputHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.containerView.addConstraints(viewsConstraint_H)
-        self.containerView.addConstraints(viewsConstraint_V)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]-[view7(inputHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.containerView.addConstraints(viewsConstraint_H as [AnyObject])
+        self.containerView.addConstraints(viewsConstraint_V as [AnyObject])
     }
     
     
@@ -238,7 +238,7 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         
         title = "Material Item"
         
-        var editButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var editButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         editButton.addTarget(self, action: "enterEditMode", forControlEvents: UIControlEvents.TouchUpInside)
         editButton.setTitle("Edit", forState: UIControlState.Normal)
         editButton.titleLabel!.font =  layoutVars.buttonFont
@@ -248,25 +248,25 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         
         //name
         
-        self.typeLbl = Label(titleText: "Item Type")
+        self.typeLbl = Label(text: "Item Type")
         self.containerView.addSubview(self.typeLbl)
         
         
-        self.typeValueLbl = Label(titleText: "Type Value")
+        self.typeValueLbl = Label(text: "Type Value")
         self.containerView.addSubview(self.typeValueLbl)
         
         //description
         
-        self.descriptionLbl = Label(titleText: "Item Description")
+        self.descriptionLbl = Label(text: "Item Description")
         self.containerView.addSubview(self.descriptionLbl)
         
         
-        self.descriptionValueLbl = Label(titleText: "Description Value")
+        self.descriptionValueLbl = Label(text: "Description Value")
         self.containerView.addSubview(self.descriptionValueLbl)
         
         //status
         
-        self.statusLbl = Label(titleText: "Item Status")
+        self.statusLbl = Label(text: "Item Status")
         self.containerView.addSubview(self.statusLbl)
        
         
@@ -299,23 +299,23 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         let viewsDictionary = ["view1":self.typeLbl,"view2":self.typeValueLbl,"view3":self.descriptionLbl,"view4":self.descriptionValueLbl,"view5":self.statusLbl,"view6":self.statusTxtField]
         let metricsDictionary = ["fullWidth": self.view.frame.size.width - 20,"inputHeight":layoutVars.inputHeight]
         //size constraint
-        let typeLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.typeLbl.addConstraints(typeLabelConstraint_H)
-        let typeValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.typeValueLbl.addConstraints(typeValueConstraint_H)
-        let descriptionLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.descriptionLbl.addConstraints(descriptionLabelConstraint_H)
-        let descriptionValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.descriptionValueLbl.addConstraints(descriptionValueConstraint_H)
-        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.statusLbl.addConstraints(statusLabelConstraint_H)
-        let statusPickerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.statusTxtField.addConstraints(statusPickerConstraint_H)
+        let typeLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.typeLbl.addConstraints(typeLabelConstraint_H as [AnyObject])
+        let typeValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.typeValueLbl.addConstraints(typeValueConstraint_H as [AnyObject])
+        let descriptionLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.descriptionLbl.addConstraints(descriptionLabelConstraint_H as [AnyObject])
+        let descriptionValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.descriptionValueLbl.addConstraints(descriptionValueConstraint_H as [AnyObject])
+        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.statusLbl.addConstraints(statusLabelConstraint_H as [AnyObject])
+        let statusPickerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.statusTxtField.addConstraints(statusPickerConstraint_H as [AnyObject])
         //auto layout position constraints
         let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]", options: nil, metrics: nil, views: viewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.containerView.addConstraints(viewsConstraint_H)
-        self.containerView.addConstraints(viewsConstraint_V)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        self.containerView.addConstraints(viewsConstraint_H as [AnyObject])
+        self.containerView.addConstraints(viewsConstraint_V as [AnyObject])
         
     }
     
@@ -353,7 +353,7 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         
         title = "Edit Labor"
         
-        var doneEditingButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var doneEditingButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         doneEditingButton.addTarget(self, action: "exitEditMode", forControlEvents: UIControlEvents.TouchUpInside)
         doneEditingButton.setTitle("Done", forState: UIControlState.Normal)
         doneEditingButton.titleLabel!.font =  layoutVars.buttonFont
@@ -369,11 +369,11 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         self.containerView.addSubview(self.tapBtn)
         
         
-        self.typeLbl = Label(titleText: "Item Type")
+        self.typeLbl = Label(text: "Item Type")
         self.containerView.addSubview(self.typeLbl)
         
         
-        self.typeValueLbl = Label(titleText: "Type Value")
+        self.typeValueLbl = Label(text: "Type Value")
         self.containerView.addSubview(self.typeValueLbl)
         
         
@@ -390,7 +390,7 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         
         
         
-        self.descriptionLbl = Label(titleText: "Item Description")
+        self.descriptionLbl = Label(text: "Item Description")
         self.containerView.addSubview(self.descriptionLbl)
         
         self.descriptionTxtField = PaddedTextField()
@@ -399,7 +399,7 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         
         
         
-        self.statusLbl = Label(titleText: "Work Order Status")
+        self.statusLbl = Label(text: "Work Order Status")
         self.containerView.addSubview(self.statusLbl)
         
         
@@ -432,29 +432,29 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         let editViewsDictionary = ["view1":self.typeLbl,"view2":self.typeValueLbl,"view3":self.typeEditBtn,"view4":self.descriptionLbl,"view5":self.descriptionTxtField,"view6":self.statusLbl,"view7":self.statusTxtField]
         let metricsDictionary = ["fullWidth": self.view.frame.size.width - 20,"inputHeight":layoutVars.inputHeight]
         //size constraint
-        let typeLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.typeLbl.addConstraints(typeLabelConstraint_H)
-        let typeValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.typeValueLbl.addConstraints(typeValueConstraint_H)
-        let typeEditBtnConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(60)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.typeEditBtn.addConstraints(typeEditBtnConstraint_H)
-        let descriptionLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.descriptionLbl.addConstraints(descriptionLabelConstraint_H)
-        let descriptionValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.descriptionTxtField.addConstraints(descriptionValueConstraint_H)
-        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.statusLbl.addConstraints(statusLabelConstraint_H)
-        let statusPickerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.statusTxtField.addConstraints(statusPickerConstraint_H)
+        let typeLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.typeLbl.addConstraints(typeLabelConstraint_H as [AnyObject])
+        let typeValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.typeValueLbl.addConstraints(typeValueConstraint_H as [AnyObject])
+        let typeEditBtnConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(60)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.typeEditBtn.addConstraints(typeEditBtnConstraint_H as [AnyObject])
+        let descriptionLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.descriptionLbl.addConstraints(descriptionLabelConstraint_H as [AnyObject])
+        let descriptionValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.descriptionTxtField.addConstraints(descriptionValueConstraint_H as [AnyObject])
+        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.statusLbl.addConstraints(statusLabelConstraint_H as [AnyObject])
+        let statusPickerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.statusTxtField.addConstraints(statusPickerConstraint_H as [AnyObject])
         //auto layout position constraints
         let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]", options: nil, metrics: nil, views: editViewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view4(20)]-[view5(inputHeight)]-[view6(20)]-[view7(inputHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.containerView.addConstraints(viewsConstraint_H)
-        self.containerView.addConstraints(viewsConstraint_V)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view4(20)]-[view5(inputHeight)]-[view6(20)]-[view7(inputHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.containerView.addConstraints(viewsConstraint_H as [AnyObject])
+        self.containerView.addConstraints(viewsConstraint_V as [AnyObject])
         let typeEditConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-220-[view3]", options: nil, metrics: nil, views: editViewsDictionary)
-        let typeEditConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view3(inputHeight)]", options: nil, metrics: metricsDictionary, views: editViewsDictionary)
-        self.containerView.addConstraints(typeEditConstraint_H)
-        self.containerView.addConstraints(typeEditConstraint_V)
+        let typeEditConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view3(inputHeight)]", options: nil, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.containerView.addConstraints(typeEditConstraint_H as [AnyObject])
+        self.containerView.addConstraints(typeEditConstraint_V as [AnyObject])
     }
     
     
@@ -464,7 +464,7 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         
         title = "Edit Material"
         
-        var doneEditingButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var doneEditingButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         doneEditingButton.addTarget(self, action: "exitEditMode", forControlEvents: UIControlEvents.TouchUpInside)
         doneEditingButton.setTitle("Done", forState: UIControlState.Normal)
         doneEditingButton.titleLabel!.font =  layoutVars.buttonFont
@@ -480,11 +480,11 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         self.containerView.addSubview(self.tapBtn)
         
         
-        self.typeLbl = Label(titleText: "Item Type")
+        self.typeLbl = Label(text: "Item Type")
         self.containerView.addSubview(self.typeLbl)
         
         
-        self.typeValueLbl = Label(titleText: "Type Value")
+        self.typeValueLbl = Label(text: "Type Value")
         self.containerView.addSubview(self.typeValueLbl)
         
        
@@ -496,13 +496,13 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         self.typeEditBtn.setTranslatesAutoresizingMaskIntoConstraints(false)//for autolayout
         self.containerView.addSubview(self.typeEditBtn)
         
-        self.descriptionLbl = Label(titleText: "Item Description")
+        self.descriptionLbl = Label(text: "Item Description")
         self.containerView.addSubview(self.descriptionLbl)
         
         self.descriptionTxtField = PaddedTextField()
         self.containerView.addSubview(self.descriptionTxtField)
         
-        self.statusLbl = Label(titleText: "Work Order Status")
+        self.statusLbl = Label(text: "Work Order Status")
         self.containerView.addSubview(self.statusLbl)
         
         self.statusPicker = Picker()
@@ -536,29 +536,29 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         let metricsDictionary = ["fullWidth": self.view.frame.size.width - 20,"inputHeight":layoutVars.inputHeight]
         
         //size constraint
-        let typeLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.typeLbl.addConstraints(typeLabelConstraint_H)
-        let typeValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.typeValueLbl.addConstraints(typeValueConstraint_H)
-        let typeEditBtnConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(60)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.typeEditBtn.addConstraints(typeEditBtnConstraint_H)
-        let descriptionLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.descriptionLbl.addConstraints(descriptionLabelConstraint_H)
-        let descriptionValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.descriptionTxtField.addConstraints(descriptionValueConstraint_H)
-        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.statusLbl.addConstraints(statusLabelConstraint_H)
-        let statusPickerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.statusTxtField.addConstraints(statusPickerConstraint_H)
+        let typeLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.typeLbl.addConstraints(typeLabelConstraint_H as [AnyObject])
+        let typeValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.typeValueLbl.addConstraints(typeValueConstraint_H as [AnyObject])
+        let typeEditBtnConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(60)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.typeEditBtn.addConstraints(typeEditBtnConstraint_H as [AnyObject])
+        let descriptionLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.descriptionLbl.addConstraints(descriptionLabelConstraint_H as [AnyObject])
+        let descriptionValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.descriptionTxtField.addConstraints(descriptionValueConstraint_H as [AnyObject])
+        let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.statusLbl.addConstraints(statusLabelConstraint_H as [AnyObject])
+        let statusPickerConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.statusTxtField.addConstraints(statusPickerConstraint_H as [AnyObject])
         //auto layout position constraints
         let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]", options: nil, metrics: nil, views: editViewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view4(20)]-[view5(inputHeight)]-[view6(20)]-[view7(inputHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.containerView.addConstraints(viewsConstraint_H)
-        self.containerView.addConstraints(viewsConstraint_V)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view4(20)]-[view5(inputHeight)]-[view6(20)]-[view7(inputHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.containerView.addConstraints(viewsConstraint_H as [AnyObject])
+        self.containerView.addConstraints(viewsConstraint_V as [AnyObject])
         let typeEditConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-220-[view3]", options: nil, metrics: nil, views: editViewsDictionary)
-        let typeEditConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view3(inputHeight)]", options: nil, metrics: metricsDictionary, views: editViewsDictionary)
-        self.containerView.addConstraints(typeEditConstraint_H)
-        self.containerView.addConstraints(typeEditConstraint_V)
+        let typeEditConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view3(inputHeight)]", options: nil, metrics: metricsDictionary as [NSObject : AnyObject], views: editViewsDictionary)
+        self.containerView.addConstraints(typeEditConstraint_H as [AnyObject])
+        self.containerView.addConstraints(typeEditConstraint_V as [AnyObject])
     }
     
     
@@ -622,12 +622,12 @@ class ItemViewController: UIViewController, UIPickerViewDelegate, UITextFieldDel
         return self.statusArray.count
     }
     
-    func pickerView(pickerView: UIPickerView!, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         return self.statusArray[row]
     }
     
     
-    func pickerView(pickerView: UIPickerView!, didSelectRow row: Int, inComponent component: Int)
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         // typeTxtField.text = "\(self.type[row])"
         self.statusTxtField.text = "\(self.statusArray[row])"

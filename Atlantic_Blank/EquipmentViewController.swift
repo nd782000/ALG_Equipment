@@ -65,7 +65,7 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         //custom back button
-        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         backButton.addTarget(self, action: "goBack", forControlEvents: UIControlEvents.TouchUpInside)
         backButton.setTitle("Back", forState: UIControlState.Normal)
         backButton.titleLabel!.font =  layoutVars.buttonFont
@@ -238,38 +238,38 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         //size constraint
         let nameLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
         let nameLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view1(15)]", options:nil, metrics: nil, views: viewsDictionary)
-        self.nameLbl.addConstraints(nameLblConstraint_H)
-        self.nameLbl.addConstraints(nameLblConstraint_V)
+        self.nameLbl.addConstraints(nameLblConstraint_H as [AnyObject])
+        self.nameLbl.addConstraints(nameLblConstraint_V as [AnyObject])
         
         //size constraint
         let typeNameLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
         let typeNameLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view2(15)]", options:nil, metrics: nil, views: viewsDictionary)
-        self.typeNameLbl.addConstraints(typeNameLblConstraint_H)
-        self.typeNameLbl.addConstraints(typeNameLblConstraint_V)
+        self.typeNameLbl.addConstraints(typeNameLblConstraint_H as [AnyObject])
+        self.typeNameLbl.addConstraints(typeNameLblConstraint_V as [AnyObject])
         
         //size constraint
         let makeLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
         let makeLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view3(15)]", options:nil, metrics: nil, views: viewsDictionary)
-        self.makeLbl.addConstraints(makeLblConstraint_H)
-        self.makeLbl.addConstraints(makeLblConstraint_V)
+        self.makeLbl.addConstraints(makeLblConstraint_H as [AnyObject])
+        self.makeLbl.addConstraints(makeLblConstraint_V as [AnyObject])
         
         //size constraint
         let modelLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
         let modelLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view4(15)]", options:nil, metrics: nil, views: viewsDictionary)
-        self.modelLbl.addConstraints(modelLblConstraint_H)
-        self.modelLbl.addConstraints(modelLblConstraint_V)
+        self.modelLbl.addConstraints(modelLblConstraint_H as [AnyObject])
+        self.modelLbl.addConstraints(modelLblConstraint_V as [AnyObject])
         
         //size constraint
         let statusLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
         let statusLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view5(15)]", options:nil, metrics: nil, views: viewsDictionary)
-        self.statusLbl.addConstraints(statusLblConstraint_H)
-        self.statusLbl.addConstraints(statusLblConstraint_V)
+        self.statusLbl.addConstraints(statusLblConstraint_H as [AnyObject])
+        self.statusLbl.addConstraints(statusLblConstraint_V as [AnyObject])
         
         //size constraint
         let crewLblConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: nil, metrics: metricsDictionary, views: viewsDictionary)
         let crewLblConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view6(15)]", options:nil, metrics: nil, views: viewsDictionary)
-        self.crewLbl.addConstraints(crewLblConstraint_H)
-        self.crewLbl.addConstraints(crewLblConstraint_V)
+        self.crewLbl.addConstraints(crewLblConstraint_H as [AnyObject])
+        self.crewLbl.addConstraints(crewLblConstraint_V as [AnyObject])
         
         
         
@@ -280,9 +280,9 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-84-[view1]-[view2]-[view3]-[view4]-[view5]-[view6]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: nil, views: viewsDictionary)
         
         
-        self.view.addConstraints(viewsConstraint_H)
+        self.view.addConstraints(viewsConstraint_H as [AnyObject])
         //self.containerView.addConstraints(viewsConstraint_H2)
-        self.view.addConstraints(viewsConstraint_V)
+        self.view.addConstraints(viewsConstraint_V as [AnyObject])
         
         
         
@@ -298,26 +298,26 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         //size constraint
         let scConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
         let scConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view1(40)]", options:nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
-        equipSC.addConstraints(scConstraint_H)
-        equipSC.addConstraints(scConstraint_V)
+        equipSC.addConstraints(scConstraint_H as [AnyObject])
+        equipSC.addConstraints(scConstraint_V as [AnyObject])
         
         //size constraint
         let partsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
         let partsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view2(200)]", options:nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
-        partsTableView.addConstraints(partsConstraint_H)
-        partsTableView.addConstraints(partsConstraint_V)
+        partsTableView.addConstraints(partsConstraint_H as [AnyObject])
+        partsTableView.addConstraints(partsConstraint_V as [AnyObject])
         
         //size constraint
         let scheduleConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
         let scheduleConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view3(200)]", options:nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
-        scheduleTableView.addConstraints(scheduleConstraint_H)
-        scheduleTableView.addConstraints(scheduleConstraint_V)
+        scheduleTableView.addConstraints(scheduleConstraint_H as [AnyObject])
+        scheduleTableView.addConstraints(scheduleConstraint_V as [AnyObject])
         
         //size constraint
         let historyConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
         let historyConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view4(200)]", options:nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
-        historyTableView.addConstraints(historyConstraint_H)
-        historyTableView.addConstraints(historyConstraint_V)
+        historyTableView.addConstraints(historyConstraint_H as [AnyObject])
+        historyTableView.addConstraints(historyConstraint_V as [AnyObject])
         
         
         //auto layout position constraints
@@ -331,12 +331,12 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         
 
         
-        self.view.addConstraints(tableViewsConstraint_H)
-        self.view.addConstraints(tableViewsConstraint_V)
+        self.view.addConstraints(tableViewsConstraint_H as [AnyObject])
+        self.view.addConstraints(tableViewsConstraint_V as [AnyObject])
         
-        self.view.addConstraints(partsViewsConstraint_H)
+        self.view.addConstraints(partsViewsConstraint_H as [AnyObject])
         
-        self.view.addConstraints(partsViewsConstraint_V)
+        self.view.addConstraints(partsViewsConstraint_V as [AnyObject])
         
         
         
@@ -371,21 +371,21 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
            
             let partsViewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view2]", options: nil, metrics: nil, views: tablesDictionary)
             let partsViewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-344-[view2]", options: nil, metrics: nil, views: tablesDictionary)
-            self.view.addConstraints(partsViewsConstraint_H)
-            self.view.addConstraints(partsViewsConstraint_V)
+            self.view.addConstraints(partsViewsConstraint_H as [AnyObject])
+            self.view.addConstraints(partsViewsConstraint_V as [AnyObject])
 
         case 1:
             self.view.addSubview(scheduleTableView)
             let scheduleViewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view3]", options: nil, metrics: nil, views: tablesDictionary)
             let scheduleViewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-344-[view3]", options: nil, metrics: nil, views: tablesDictionary)
-            self.view.addConstraints(scheduleViewsConstraint_H)
-            self.view.addConstraints(scheduleViewsConstraint_V)
+            self.view.addConstraints(scheduleViewsConstraint_H as [AnyObject])
+            self.view.addConstraints(scheduleViewsConstraint_V as [AnyObject])
         default:
             self.view.addSubview(historyTableView)
             let historyViewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view4]", options: nil, metrics: nil, views: tablesDictionary)
             let historyViewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-344-[view4]", options: nil, metrics: nil, views: tablesDictionary)
-            self.view.addConstraints(historyViewsConstraint_H)
-            self.view.addConstraints(historyViewsConstraint_V)
+            self.view.addConstraints(historyViewsConstraint_H as [AnyObject])
+            self.view.addConstraints(historyViewsConstraint_V as [AnyObject])
         }
     }
     
@@ -411,7 +411,7 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell:UITableViewCell = partsTableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        var cell:UITableViewCell = partsTableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         if (tableView == partsTableView) {
             // Do something
             cell.textLabel?.text = "5"

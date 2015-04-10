@@ -51,7 +51,7 @@ class ViewController: UIViewController, UIActionSheetDelegate, LoginDelegate  {
     
     
     //Action Sheet Delegate
-    func actionSheet(sheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
+    func actionSheet(sheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         println("index %d %@", buttonIndex, sheet.buttonTitleAtIndex(buttonIndex));
         
         
