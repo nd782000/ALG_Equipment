@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55B17EDD1AD44A560079E0E0 /* NewEquipmentViewController in Resources */ = {isa = PBXBuildFile; fileRef = 55B17EDC1AD44A560079E0E0 /* NewEquipmentViewController */; };
+		55B9B7221AD6BBDD00E2F37A /* UsageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B9B7211AD6BBDD00E2F37A /* UsageListViewController.swift */; };
+		55B9B7241AD6BC3700E2F37A /* UsageEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B9B7231AD6BC3700E2F37A /* UsageEntryViewController.swift */; };
+		55B9B7261AD6BC7200E2F37A /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B9B7251AD6BC7200E2F37A /* TaskViewController.swift */; };
+		55B9B7281AD75E8F00E2F37A /* UsageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B9B7271AD75E8F00E2F37A /* UsageTableViewCell.swift */; };
 		55F5175B1AD2E052009D06EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175A1AD2E052009D06EC /* AppDelegate.swift */; };
 		55F5175E1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175C1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld */; };
 		55F517601AD2E052009D06EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5175F1AD2E052009D06EC /* ViewController.swift */; };
@@ -28,7 +31,6 @@
 		55F5179A1AD2E88D009D06EC /* EquipmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F517991AD2E88D009D06EC /* EquipmentTableViewCell.swift */; };
 		55F5179C1AD2E8A0009D06EC /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5179B1AD2E8A0009D06EC /* ScheduleTableViewCell.swift */; };
 		55F5179E1AD2E8B1009D06EC /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5179D1AD2E8B1009D06EC /* ItemTableViewCell.swift */; };
-		55F517A21AD2EA65009D06EC /* NewMaintenanceItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F517A11AD2EA65009D06EC /* NewMaintenanceItemViewController.swift */; };
 		5A99BBE214EB16ECA52D051C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B9E3812E263CB888162635 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -43,7 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		55B17EDC1AD44A560079E0E0 /* NewEquipmentViewController */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NewEquipmentViewController; sourceTree = "<group>"; };
+		55B9B7211AD6BBDD00E2F37A /* UsageListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageListViewController.swift; sourceTree = "<group>"; };
+		55B9B7231AD6BC3700E2F37A /* UsageEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageEntryViewController.swift; sourceTree = "<group>"; };
+		55B9B7251AD6BC7200E2F37A /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		55B9B7271AD75E8F00E2F37A /* UsageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageTableViewCell.swift; sourceTree = "<group>"; };
 		55F517551AD2E052009D06EC /* Atlantic_Blank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlantic_Blank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55F517591AD2E052009D06EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55F5175A1AD2E052009D06EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +73,6 @@
 		55F517991AD2E88D009D06EC /* EquipmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EquipmentTableViewCell.swift; path = ../EquipmentTableViewCell.swift; sourceTree = "<group>"; };
 		55F5179B1AD2E8A0009D06EC /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleTableViewCell.swift; path = ../ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		55F5179D1AD2E8B1009D06EC /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
-		55F517A11AD2EA65009D06EC /* NewMaintenanceItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMaintenanceItemViewController.swift; sourceTree = "<group>"; };
 		6B261C5003AE203F11B88E1A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D26F56DB6B4EE40348CAE025 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E8B9E3812E263CB888162635 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,17 +138,19 @@
 				55F517831AD2E625009D06EC /* EquipmentAPI.swift */,
 				55F517871AD2E671009D06EC /* EquipmentViewController.swift */,
 				55F517891AD2E6B6009D06EC /* NewEquipmentViewController.swift */,
-				55B17EDC1AD44A560079E0E0 /* NewEquipmentViewController */,
-				55F517A11AD2EA65009D06EC /* NewMaintenanceItemViewController.swift */,
 				55F5178B1AD2E77B009D06EC /* ScheduleViewController.swift */,
 				55F5178D1AD2E7A8009D06EC /* NetData.swift */,
 				55F5178F1AD2E7F6009D06EC /* WorkOrderViewController.swift */,
 				55F517911AD2E843009D06EC /* ItemViewController.swift */,
 				55F517951AD2E85D009D06EC /* ItemListViewController.swift */,
+				55B9B7211AD6BBDD00E2F37A /* UsageListViewController.swift */,
+				55B9B7231AD6BC3700E2F37A /* UsageEntryViewController.swift */,
+				55B9B7251AD6BC7200E2F37A /* TaskViewController.swift */,
 				55F517971AD2E878009D06EC /* ImageLoader.swift */,
 				55F5179B1AD2E8A0009D06EC /* ScheduleTableViewCell.swift */,
 				55F517991AD2E88D009D06EC /* EquipmentTableViewCell.swift */,
 				55F5179D1AD2E8B1009D06EC /* ItemTableViewCell.swift */,
+				55B9B7271AD75E8F00E2F37A /* UsageTableViewCell.swift */,
 				55F517661AD2E052009D06EC /* LaunchScreen.xib */,
 				55F5175C1AD2E052009D06EC /* Atlantic_Blank.xcdatamodeld */,
 			);
@@ -269,7 +275,6 @@
 			files = (
 				55F517681AD2E052009D06EC /* LaunchScreen.xib in Resources */,
 				55F517651AD2E052009D06EC /* Images.xcassets in Resources */,
-				55B17EDD1AD44A560079E0E0 /* NewEquipmentViewController in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,13 +340,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B9B7221AD6BBDD00E2F37A /* UsageListViewController.swift in Sources */,
 				55F517981AD2E878009D06EC /* ImageLoader.swift in Sources */,
 				55F5178A1AD2E6B6009D06EC /* NewEquipmentViewController.swift in Sources */,
+				55B9B7241AD6BC3700E2F37A /* UsageEntryViewController.swift in Sources */,
 				55F517601AD2E052009D06EC /* ViewController.swift in Sources */,
 				55F517801AD2E533009D06EC /* LayoutVars.swift in Sources */,
 				55F5178C1AD2E77B009D06EC /* ScheduleViewController.swift in Sources */,
 				55F517821AD2E5CE009D06EC /* EquipmentListViewController.swift in Sources */,
-				55F517A21AD2EA65009D06EC /* NewMaintenanceItemViewController.swift in Sources */,
 				55F5179C1AD2E8A0009D06EC /* ScheduleTableViewCell.swift in Sources */,
 				55F517921AD2E843009D06EC /* ItemViewController.swift in Sources */,
 				55F517841AD2E625009D06EC /* EquipmentAPI.swift in Sources */,
@@ -351,6 +357,8 @@
 				55F5179A1AD2E88D009D06EC /* EquipmentTableViewCell.swift in Sources */,
 				55F517901AD2E7F6009D06EC /* WorkOrderViewController.swift in Sources */,
 				55F517881AD2E671009D06EC /* EquipmentViewController.swift in Sources */,
+				55B9B7281AD75E8F00E2F37A /* UsageTableViewCell.swift in Sources */,
+				55B9B7261AD6BC7200E2F37A /* TaskViewController.swift in Sources */,
 				55F5179E1AD2E8B1009D06EC /* ItemTableViewCell.swift in Sources */,
 				55F5175B1AD2E052009D06EC /* AppDelegate.swift in Sources */,
 			);

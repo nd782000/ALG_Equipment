@@ -14,7 +14,7 @@ import Alamofire
 class EquipmentListViewController: ViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate {
     var newEquipmentButton:UIBarButtonItem!
     var refreshControl:UIRefreshControl!
-    var equipmentListTableView: UITableView!
+    var equipmentListTableView: TableView!
     
     var equipmentSet:NSMutableOrderedSet!
     
@@ -50,14 +50,14 @@ class EquipmentListViewController: ViewController, UITableViewDelegate, UITableV
         self.navigationItem.title = "Equipment List"
         
         let items = ["Name", "Status", "Make", "Crew"]
-        let customSC = UISegmentedControl(items: items)
-        customSC.selectedSegmentIndex = 0
+        let customSC = SegmentedControl(items: items)
+       // customSC.selectedSegmentIndex = 0
         // Set up Frame and SegmentedControl
-        let frame = UIScreen.mainScreen().bounds
-        customSC.frame = CGRectMake(20, 74, self.view.frame.size.width - 40, 40)
-        customSC.layer.cornerRadius = 5.0  // Don't let background bleed
-        customSC.backgroundColor = layoutVars.buttonBackground
-        customSC.tintColor = layoutVars.buttonTint
+        //let frame = UIScreen.mainScreen().bounds
+       // customSC.frame = CGRectMake(20, 74, self.view.frame.size.width - 40, 40)
+        //customSC.layer.cornerRadius = 5.0  // Don't let background bleed
+        //customSC.backgroundColor = layoutVars.buttonBackground
+       // customSC.tintColor = layoutVars.buttonTint
         customSC.addTarget(self, action: "changeSearchOptions:", forControlEvents: UIControlEvents.ValueChanged)
         
         self.view.addSubview(customSC)
@@ -68,14 +68,15 @@ class EquipmentListViewController: ViewController, UITableViewDelegate, UITableV
         
         
         
-        self.equipmentListTableView =  UITableView()
-        equipmentListTableView.frame = CGRectMake(0, 124, self.view.frame.size.width, self.view.frame.size.height - 124)
-        equipmentListTableView.layer.cornerRadius = 4.0
+        self.equipmentListTableView =  TableView()
+
+        //equipmentListTableView.frame = CGRectMake(0, 124, self.view.frame.size.width, self.view.frame.size.height - 124)
+        //equipmentListTableView.layer.cornerRadius = 4.0
         //equipmentListTableView.setTranslatesAutoresizingMaskIntoConstraints(false) //allows for autolayout
-        equipmentListTableView.delegate  =  self
-        equipmentListTableView.dataSource  =  self
-        equipmentListTableView.registerClass(EquipmentTableViewCell.self, forCellReuseIdentifier: "cell")
-        self.view.addSubview(equipmentListTableView)
+        self.equipmentListTableView.delegate  =  self
+        self.equipmentListTableView.dataSource  =  self
+        self.equipmentListTableView.registerClass(EquipmentTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(self.equipmentListTableView)
         
         
         
@@ -85,88 +86,42 @@ class EquipmentListViewController: ViewController, UITableViewDelegate, UITableV
         self.equipmentListTableView.addSubview(refreshControl)
         
         
-        //getEquipmentList()
+        /////////////////  Auto Layout   ////////////////////////////////////////////////
+        
+        //apply to each view
+        //itemsTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        //auto layout group
+        let viewsDictionary = [
+            "view1":customSC,
+            "view2":self.equipmentListTableView
+        ]
+        
+        let sizeVals = ["width": layoutVars.fullWidth - 30,"height": self.view.frame.size.height - 134]
+        
+        //////////////   auto layout position constraints   /////////////////////////////
+        
+        let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view1(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        
+        let tableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view2(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        
+        
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-74-[view1(40)]-10-[view2(height)]-10-|", options:NSLayoutFormatOptions.AlignAllLeft, metrics: sizeVals, views: viewsDictionary)
+        
+        
+        self.view.addConstraints(tableConstraint_H)
+        self.view.addConstraints(viewsConstraint_H)
+        self.view.addConstraints(viewsConstraint_V)
+       
+        
+        
+        
+        
+        
         
         getEquipmentList()
         
-        // for elem in dataArray {
-        //println(elem)
-        // }
-        
-        /*
-        println("1")
-        Alamofire.request(.POST, "http://www.atlanticlawnandgarden.com/cp/app/equipment.php")
-        .responseJSON { (request, response, JSON, error) in
-        if let jsonResult = JSON as? NSMutableArray! {
-        println("json = \(jsonResult)")
-        println("2")
-        self.itemArray = jsonResult
-        self.equipmentListTableView.reloadData()
-        } else {
-        println("fail")
-        }
-        
-        if (error != nil) {
-        println("Error")
-        println(error)
-        }
-        
-        }
-        
-        
-        //clientTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        */
-        
-        
-        
-        
-        /*
-        
-        var newEvaluationButton   = UIButton.buttonWithType(UIButtonType.System) as UIButton
-        newEvaluationButton.setTranslatesAutoresizingMaskIntoConstraints(false) //allows for autolayout
-        newEvaluationButton.layer.cornerRadius = 4.0
-        //newEvaluationButton.center = self.view.center
-        newEvaluationButton.backgroundColor = layoutVars.buttonColor1
-        newEvaluationButton.setTitle("New Evaluation", forState: UIControlState.Normal)
-        newEvaluationButton.titleLabel!.font =  layoutVars.buttonFont
-        newEvaluationButton.setTitleColor(layoutVars.buttonTextColor, forState: UIControlState.Normal)
-        newEvaluationButton.addTarget(self, action: "displayClientList", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(newEvaluationButton)
-        
-        
-        
-        
-        //--------------- constraints
-        
-        //instead of using literals you can use metrics
-        let metricsDictionary = ["view1Width":self.view.frame.size.width,"view1Height": 50.0,"view2Height":40.0,"viewWidth":50.0,"navHeight":layoutVars.navAndStatusBarHeight + 20 ]
-        
-        //make dictionary for views
-        let viewsDictionary = ["view1":newEvaluationButton,"view2":equipmentListTableView]
-        
-        //sizing constraints added to individual views
-        //equipmentListTableView
-        let view1_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(>=300)]", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-        let view1_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[view1(40)]", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-        newEvaluationButton.addConstraints(view1_constraint_H)
-        newEvaluationButton.addConstraints(view1_constraint_V)
-        
-        let view2_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(>=300)]", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-        let view2_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[view2(>=200)]", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-        equipmentListTableView.addConstraints(view2_constraint_H)
-        equipmentListTableView.addConstraints(view2_constraint_V)
-        
-        //position constraints added to parent view
-        //view
-        let view_constraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-        let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-navHeight-[view1]-[view2]-0-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
-        
-        view.addConstraints(view_constraint_H)
-        view.addConstraints(view_constraint_V)
-        
-        */
-        
-        
+      
         
     }
     

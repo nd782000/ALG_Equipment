@@ -10,16 +10,20 @@ import Foundation
 import UIKit
 
 
-class ItemListViewController: ViewController, UITableViewDelegate, UITableViewDataSource{
+class ItemListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var layoutVars:LayoutVars = LayoutVars()
     
-    var itemListTableView: UITableView!
+    var itemListTableView: TableView!
     var itemArray:NSMutableArray!
     
+    var itemID:String!
+    var itemName:String!
     
     
     
+    
+    var delegate:ItemDelegate!
     
     
     
@@ -52,7 +56,7 @@ class ItemListViewController: ViewController, UITableViewDelegate, UITableViewDa
         
         
         
-        self.itemListTableView =  UITableView()
+        self.itemListTableView =  TableView()
         
         //segmented controller
         
@@ -60,9 +64,8 @@ class ItemListViewController: ViewController, UITableViewDelegate, UITableViewDa
         
         //result table
         
-        //self.scheduleTableView.frame = CGRectMake(10, 106, self.view.frame.size.width - 20, self.view.frame.size.height - 106)
-        self.itemListTableView.layer.cornerRadius = 4.0
-        self.itemListTableView.setTranslatesAutoresizingMaskIntoConstraints(false) //allows for autolayout
+        
+        
         self.itemListTableView.delegate  =  self
         self.itemListTableView.dataSource  =  self
         self.itemListTableView.registerClass(ItemTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -75,13 +78,13 @@ class ItemListViewController: ViewController, UITableViewDelegate, UITableViewDa
         //auto layout group
         let itemViewsDictionary = ["view1": self.itemListTableView]
         
-        let metricsDictionary = ["fullWidth": self.view.frame.size.width - 20,"fullHeight":self.view.frame.size.height]
+        let metricsDictionary = ["fullWidth": self.view.frame.size.width - 30,"fullHeight":self.view.frame.size.height-86]
         
         println("123")
         
         //size constraint
-        let itemTableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: itemViewsDictionary)
-        let itemTableConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view1(fullHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: itemViewsDictionary)
+        let itemTableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1(fullWidth)]-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: itemViewsDictionary)
+        let itemTableConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-76-[view1(fullHeight)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: itemViewsDictionary)
         self.view.addConstraints(itemTableConstraint_H)
         self.view.addConstraints(itemTableConstraint_V)
         
@@ -119,13 +122,20 @@ class ItemListViewController: ViewController, UITableViewDelegate, UITableViewDa
         //checks selected cell
         var newCell = tableView.cellForRowAtIndexPath(indexPath)
         newCell?.accessoryType = .Checkmark
+        itemName =  self.itemArray[indexPath.row] as NSString
+        itemID = String(indexPath.row)
         
     }
     
     
     func goBack(){
+       // let i = (navigationController?.viewControllers.count)! - 1
+        //let itemViewController = navigationController?.viewControllers[i] as ItemViewController
+       // itemViewController.typeValueLbl.text = itemName
+        if((itemName) != nil){
+            delegate.itemChange(itemID, itemName: itemName)
+        }
         navigationController?.popViewControllerAnimated(true)
-        
     }
     
     override func didReceiveMemoryWarning() {

@@ -33,9 +33,9 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var item:EquipmentInfo!
     
-    var partsTableView: UITableView  =   UITableView()
-    var scheduleTableView: UITableView  =   UITableView()
-    var historyTableView: UITableView  =   UITableView()
+    var partsTableView: TableView  =   TableView()
+    var scheduleTableView: TableView  =   TableView()
+    var historyTableView: TableView  =   TableView()
     
     init(equip:EquipmentInfo){
         super.init(nibName:nil,bundle:nil)
@@ -75,32 +75,7 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         
-        let imgUrl = "http://atlanticlawnandgarden.com/cp/uploads/equipment/profiles/thumb_"+self.item.pic
-        println(imgUrl)
-        self.imageView = UIImageView()
-        ImageLoader.sharedLoader.imageForUrl(imgUrl, completionHandler:{(image: UIImage?, url: String) in
-            self.imageView.image = image!
-        })
-        
-        self.imageView.frame = CGRect(x: 20, y: 84, width: 144, height: 144)
-        self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2
-        self.imageView.layer.borderWidth = 2
-        self.imageView.layer.borderColor = layoutVars.borderColor
-        self.imageView.clipsToBounds = true
-        self.view.addSubview(self.imageView)
-        
-        
-        let items = ["Parts", "Schedule", "History"]
-        let equipSC = UISegmentedControl(items: items)
-        equipSC.selectedSegmentIndex = 0
-        // Set up Frame and SegmentedControl
-        let frame = UIScreen.mainScreen().bounds
-        equipSC.frame = CGRectMake(20, 248, self.view.frame.size.width - 40, 40)
-        equipSC.layer.cornerRadius = 5.0  // Don't let background bleed
-        equipSC.backgroundColor = layoutVars.buttonBackground
-        equipSC.tintColor = layoutVars.buttonTint
-        equipSC.addTarget(self, action: "changeSearchOptions:", forControlEvents: .ValueChanged)
-        self.view.addSubview(equipSC)
+       
         
         
         
@@ -118,6 +93,24 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         let model = self.item.model
         let status = self.item.status
         let crew = self.item.crew
+        
+        let imgUrl = "http://atlanticlawnandgarden.com/cp/uploads/equipment/profiles/thumb_"+self.item.pic
+        println(imgUrl)
+        self.imageView = UIImageView()
+        ImageLoader.sharedLoader.imageForUrl(imgUrl, completionHandler:{(image: UIImage?, url: String) in
+            self.imageView.image = image!
+        })
+        
+        self.imageView.frame = CGRect(x: 20, y: 84, width: 144, height: 144)
+        self.imageView.layer.cornerRadius = 5.0
+       // self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2
+        self.imageView.layer.borderWidth = 2
+        self.imageView.layer.borderColor = layoutVars.borderColor
+        self.imageView.clipsToBounds = true
+        self.view.addSubview(self.imageView)
+        
+        
+       
         
         nameLbl = UILabel()
         nameLbl.text = name
@@ -176,44 +169,43 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         //parts table
-        var tableTop:CGFloat = 298
-        partsTableView.frame = CGRectMake(0, tableTop, self.view.frame.width, self.view.frame.height - tableTop)
+        //var tableTop:CGFloat = 298
+       // partsTableView.frame = CGRectMake(0, tableTop, self.view.frame.width, self.view.frame.height - tableTop)
         //clientTableView.setTranslatesAutoresizingMaskIntoConstraints(false) //allows for autolayout
-        partsTableView.layer.cornerRadius = 4.0
+        //partsTableView.layer.cornerRadius = 4.0
+        
+        let items = ["Parts", "Schedule", "History"]
+        let equipSC = SegmentedControl(items: items)
+        equipSC.selectedSegmentIndex = 0
+        
+        equipSC.addTarget(self, action: "changeSearchOptions:", forControlEvents: .ValueChanged)
+        self.view.addSubview(equipSC)
         
         partsTableView.delegate  =  self
         partsTableView.dataSource  =  self
         partsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(partsTableView)
         
-        partsTableView.delegate = self
-        partsTableView.dataSource = self
+       
         
         //schedule table
-        scheduleTableView.frame = CGRectMake(0, tableTop, self.view.frame.width, self.view.frame.height - tableTop)
+        //scheduleTableView.frame = CGRectMake(0, tableTop, self.view.frame.width, self.view.frame.height - tableTop)
         //clientTableView.setTranslatesAutoresizingMaskIntoConstraints(false) //allows for autolayout
-        scheduleTableView.layer.cornerRadius = 4.0
+        //scheduleTableView.layer.cornerRadius = 4.0
         
         scheduleTableView.delegate  =  self
         scheduleTableView.dataSource  =  self
         scheduleTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         
-        scheduleTableView.delegate = self
-        scheduleTableView.dataSource = self
-        
         //history table
-        historyTableView.frame = CGRectMake(0, tableTop, self.view.frame.width, self.view.frame.height - tableTop)
+        //historyTableView.frame = CGRectMake(0, tableTop, self.view.frame.width, self.view.frame.height - tableTop)
         //clientTableView.setTranslatesAutoresizingMaskIntoConstraints(false) //allows for autolayout
-        historyTableView.layer.cornerRadius = 4.0
+       // historyTableView.layer.cornerRadius = 4.0
         
         historyTableView.delegate  =  self
         historyTableView.dataSource  =  self
         historyTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
-        
-        historyTableView.delegate = self
-        historyTableView.dataSource = self
         
         
         
@@ -228,7 +220,14 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         //itemsTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         //auto layout group
-        let viewsDictionary = ["view1":self.nameLbl,"view2":self.typeNameLbl,"view3":self.makeLbl,"view4":self.modelLbl,"view5":self.statusLbl,"view6":self.crewLbl]
+        let viewsDictionary = [
+            "view1":self.nameLbl,
+            "view2":self.typeNameLbl,
+            "view3":self.makeLbl,
+            "view4":self.modelLbl,
+            "view5":self.statusLbl,
+            "view6":self.crewLbl
+        ]
         
         let metricsDictionary = ["fullWidth": self.view.frame.size.width - 174]
         //let fullWidth = metricsDictionary["fullWidth"]
@@ -287,6 +286,64 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         
+        let tablesDictionary = [
+            "view1":equipSC,
+            "view2":partsTableView,
+            "view3":scheduleTableView,
+            "view4":historyTableView
+        ]
+        let tablesMetricsDictionary = ["fullWidth": self.view.frame.size.width - 30]
+        
+        
+        //size constraint
+        let scConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view1(fullWidth)]", options: nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
+        let scConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view1(40)]", options:nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
+        equipSC.addConstraints(scConstraint_H)
+        equipSC.addConstraints(scConstraint_V)
+        
+        //size constraint
+        let partsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
+        let partsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view2(200)]", options:nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
+        partsTableView.addConstraints(partsConstraint_H)
+        partsTableView.addConstraints(partsConstraint_V)
+        
+        //size constraint
+        let scheduleConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
+        let scheduleConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view3(200)]", options:nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
+        scheduleTableView.addConstraints(scheduleConstraint_H)
+        scheduleTableView.addConstraints(scheduleConstraint_V)
+        
+        //size constraint
+        let historyConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
+        let historyConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:[view4(200)]", options:nil, metrics: tablesMetricsDictionary, views: tablesDictionary)
+        historyTableView.addConstraints(historyConstraint_H)
+        historyTableView.addConstraints(historyConstraint_V)
+        
+        
+        //auto layout position constraints
+        let tableViewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view1]", options: nil, metrics: nil, views: tablesDictionary)
+        
+        let tableViewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-284-[view1]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: nil, views: tablesDictionary)
+        
+        let partsViewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view2]", options: nil, metrics: nil, views: tablesDictionary)
+        
+        let partsViewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-344-[view2]", options: NSLayoutFormatOptions.AlignAllTop, metrics: nil, views: tablesDictionary)
+        
+
+        
+        self.view.addConstraints(tableViewsConstraint_H)
+        self.view.addConstraints(tableViewsConstraint_V)
+        
+        self.view.addConstraints(partsViewsConstraint_H)
+        
+        self.view.addConstraints(partsViewsConstraint_V)
+        
+        
+        
+        
+        
+        
+        
     }
     
     
@@ -298,13 +355,37 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
                 subview.removeFromSuperview()
             }
         }
+        
+        let tablesDictionary = [
+            
+            "view2":partsTableView,
+            "view3":scheduleTableView,
+            "view4":historyTableView
+        ]
+         //let tablesMetricsDictionary = ["fullWidth": self.view.frame.size.width - 30]
+        
         switch sender.selectedSegmentIndex {
         case 0:
             self.view.addSubview(partsTableView)
+            
+           
+            let partsViewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view2]", options: nil, metrics: nil, views: tablesDictionary)
+            let partsViewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-344-[view2]", options: nil, metrics: nil, views: tablesDictionary)
+            self.view.addConstraints(partsViewsConstraint_H)
+            self.view.addConstraints(partsViewsConstraint_V)
+
         case 1:
             self.view.addSubview(scheduleTableView)
+            let scheduleViewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view3]", options: nil, metrics: nil, views: tablesDictionary)
+            let scheduleViewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-344-[view3]", options: nil, metrics: nil, views: tablesDictionary)
+            self.view.addConstraints(scheduleViewsConstraint_H)
+            self.view.addConstraints(scheduleViewsConstraint_V)
         default:
             self.view.addSubview(historyTableView)
+            let historyViewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view4]", options: nil, metrics: nil, views: tablesDictionary)
+            let historyViewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-344-[view4]", options: nil, metrics: nil, views: tablesDictionary)
+            self.view.addConstraints(historyViewsConstraint_H)
+            self.view.addConstraints(historyViewsConstraint_V)
         }
     }
     

@@ -22,11 +22,11 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     var tapBtn:UIButton!
     var loadingView:UIView!
     
-    let screenSize: CGRect = UIScreen.mainScreen().bounds
+    //let screenSize: CGRect = UIScreen.mainScreen().bounds
     
     var layoutVars:LayoutVars = LayoutVars()
     var typeValue:String!
-    var typePicker: UIPickerView!
+    var typePicker: Picker!
     var typeTxtField: PaddedTextField!
     var makeTxtField: PaddedTextField!
     var modelTxtField: PaddedTextField!
@@ -37,21 +37,21 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     var fuelTxtField: PaddedTextField!
     var purchasedTxtField: PaddedTextField!
     var crewValue:String!
-    var crewPicker :UIPickerView!
+    var crewPicker :Picker!
     var crewTxtField: PaddedTextField!
     
-    var activeTextField:UITextField?
+    var activeTextField:PaddedTextField?
 
     
     var imageView:UIImageView!
     var progressView:UIProgressView!
     var progressValue:Float!
-    var progressLbl:UILabel!
+    var progressLbl:Label!
     
-    let DatePickerView = UIDatePicker()
+    let datePickerView = DatePicker()
     var dateFormatter = NSDateFormatter()
     
-    var submitEquipmentButton:UIButton!
+    var submitEquipmentButton:Button!
     
     let picker = UIImagePickerController()
     
@@ -84,17 +84,12 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.scrollView.contentSize = CGSizeMake(layoutVars.fullWidth, 1000)
         self.view.addSubview(self.scrollView)
         
-        // self.containerView = UIView()
-        
-        //self.scrollView.addSubview(self.containerView)
-        
-        
         //container view for auto layout
         self.containerView = UIView()
         self.containerView.backgroundColor = layoutVars.backgroundColor
 
-        /*
-self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
+        
+        self.containerView.frame = CGRectMake(0, 0, 500, 2500)
 
         self.scrollView.addSubview(self.containerView)
         
@@ -103,7 +98,7 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
         self.tapBtn.backgroundColor = UIColor.clearColor()
         self.tapBtn.addTarget(self, action: "DismissKeyboard", forControlEvents: UIControlEvents.TouchUpInside)
         
-        self.containerView.addSubview(self.tapBtn)
+        //self.containerView.addSubview(self.tapBtn)
         
         // Do any additional setup after loading the view.
         view.backgroundColor = layoutVars.backgroundColor
@@ -133,9 +128,8 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
         typeToolbar.barStyle = UIBarStyle.Black
         typeToolbar.setItems(typeItems, animated: true)
         
-        self.typePicker = UIPickerView()
+        self.typePicker = Picker()
         self.typePicker.delegate = self
-        self.typePicker.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.typeTxtField = PaddedTextField()
         self.typeTxtField.delegate = self
         self.typeTxtField.tag = 9
@@ -199,8 +193,8 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
         self.fuelTxtField.attributedPlaceholder = NSAttributedString(string:"Fuel Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.containerView.addSubview(self.fuelTxtField)
 
-        DatePickerView.datePickerMode = UIDatePickerMode.Date
-        DatePickerView.backgroundColor = layoutVars.backgroundLight
+        //datePickerView.datePickerMode = UIDatePickerMode.Date
+        //DatePickerView.backgroundColor = layoutVars.backgroundLight
         let toolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
         var items = [AnyObject]()
         //making done button
@@ -209,7 +203,7 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
         toolbar.barStyle = UIBarStyle.Black
         toolbar.setItems(items, animated: true)
         
-        DatePickerView.addTarget( self, action: "handleDatePicker", forControlEvents: UIControlEvents.ValueChanged )
+        datePickerView.addTarget( self, action: "handleDatePicker", forControlEvents: UIControlEvents.ValueChanged )
         
         //usDateFormat now contains an optional string "MM/dd/yyyy".
         
@@ -218,7 +212,7 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
         self.purchasedTxtField = PaddedTextField()
         self.purchasedTxtField.delegate = self
         self.purchasedTxtField.tag = 8
-        self.purchasedTxtField.inputView = self.DatePickerView
+        self.purchasedTxtField.inputView = self.datePickerView
         self.purchasedTxtField.inputAccessoryView = toolbar
         self.purchasedTxtField.attributedPlaceholder = NSAttributedString(string:"Purchased Date",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.containerView.addSubview(self.purchasedTxtField)
@@ -232,7 +226,7 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
         crewToolbar.barStyle = UIBarStyle.Black
         crewToolbar.setItems(crewItems, animated: true)
         
-        self.crewPicker = UIPickerView()
+        self.crewPicker = Picker()
         self.crewPicker.delegate = self
         self.crewTxtField = PaddedTextField()
         self.crewTxtField.delegate = self
@@ -255,24 +249,22 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
         self.progressView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.progressView)
         
-        self.progressLbl = UILabel()
+        self.progressLbl = Label(titleText: "Uploading...")
         self.progressLbl.alpha = 0
-        self.progressLbl.text = "Uploading..."
         self.progressLbl.textAlignment = NSTextAlignment.Center
-        self.progressLbl.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.progressLbl)
         
         
+        self.submitEquipmentButton = Button(titleText: "Submit")
+       // self.submitEquipmentButton = Button.buttonWithType(UIButtonType.System) as UIButton
+        //self.submitEquipmentButton.backgroundColor = layoutVars.buttonColor1
+        //self.submitEquipmentButton.setTitle("Submit", forState: UIControlState.Normal)
         
-        self.submitEquipmentButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
-        self.submitEquipmentButton.backgroundColor = layoutVars.buttonColor1
-        self.submitEquipmentButton.setTitle("Submit", forState: UIControlState.Normal)
-        
-        self.submitEquipmentButton.titleLabel!.font =  layoutVars.buttonFont
-        self.submitEquipmentButton.setTitleColor(layoutVars.buttonTextColor, forState: UIControlState.Normal)
-        self.submitEquipmentButton.layer.cornerRadius = 4.0
+       // self.submitEquipmentButton.titleLabel!.font =  layoutVars.buttonFont
+        //self.submitEquipmentButton.setTitleColor(layoutVars.buttonTextColor, forState: UIControlState.Normal)
+        //self.submitEquipmentButton.layer.cornerRadius = 4.0
         self.submitEquipmentButton.addTarget(self, action: "saveData", forControlEvents: UIControlEvents.TouchUpInside)
-        self.submitEquipmentButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        //self.submitEquipmentButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.containerView.addSubview(self.submitEquipmentButton)
         
         
@@ -301,7 +293,7 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
             "view14":self.submitEquipmentButton
         ]
         
-        let sizeVals = ["width": screenSize.width - 30,"height": 40]
+        let sizeVals = ["width": self.view.frame.size.width - 30,"height": 40]
         
         //////////////   auto layout position constraints   /////////////////////////////
         
@@ -334,6 +326,7 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
         self.containerView.addConstraints(viewsConstraint_H11)
         self.containerView.addConstraints(viewsConstraint_H12)
         self.containerView.addConstraints(viewsConstraint_H13)
+        self.containerView.addConstraints(viewsConstraint_H14)
         self.containerView.addConstraints(viewsConstraint_V)
     }
     
@@ -398,8 +391,8 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
     
     func handleDatePicker()
     {
-        println("PURCHASE DATE: \(dateFormatter.stringFromDate(DatePickerView.date))")
-        self.purchasedTxtField.text =  dateFormatter.stringFromDate(DatePickerView.date)
+        println("PURCHASE DATE: \(dateFormatter.stringFromDate(datePickerView.date))")
+        self.purchasedTxtField.text =  dateFormatter.stringFromDate(datePickerView.date)
     }
     
     
@@ -605,15 +598,6 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     func saveData(){
         if(self.imageView.image == nil){
             println("choose an image")
@@ -655,13 +639,6 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
         
         
         Alamofire.upload(urlRequest.0, urlRequest.1)
-            /*.progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-            //self.progressValue =
-            
-            self.progressView.progress = (totalBytesWritten as Float / totalBytesExpectedToWrite as Float)
-            println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
-            }
-            */
             .progress { _, totalBytesRead, totalBytesExpectedToRead in
                 println("ENTER .PROGRESSS")
                 println("\(totalBytesRead) of \(totalBytesExpectedToRead)")
@@ -678,18 +655,7 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
                     }
                 }
                 
-                
-                
-                // self.progressView.setProgress(Float(totalBytesRead) / Float(totalBytesExpectedToRead), animated: true)
-                //self.progressView.alpha = 1.0
             }
-            
-            
-            
-            
-            
-            
-            
             
             
             .responseString { (request, response, JSON, error) in
@@ -755,8 +721,6 @@ self.containerView.frame = CGRectMake(0, 0, 500, 2500)*/
     //Calls this function when the tap is recognized.
     func DismissKeyboard(){
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        //tableView.endEditing(true)
-        
         self.view.endEditing(true)
     }
     

@@ -1,4 +1,12 @@
 //
+//  TaskViewController.swift
+//  Atlantic_Blank
+//
+//  Created by nicholasdigiando on 4/9/15.
+//  Copyright (c) 2015 Nicholas Digiando. All rights reserved.
+//
+
+//
 //  WorkOrderViewController.swift
 //  Atlantic_Blank
 //
@@ -11,7 +19,7 @@ import Foundation
 import UIKit
 import Alamofire
 
-class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UITextFieldDelegate,  UIScrollViewDelegate{
+class Task: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UITextFieldDelegate,  UIScrollViewDelegate{
     
     //class WorkOrderViewController: UIViewController{
     
@@ -33,16 +41,11 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     var statusTxtField: PaddedTextField!
     var statusPicker :Picker!//edit mode
     
-    let statusArray = ["New", "Dispatched", "In Progress", "Complete", "Cancelled"]
+    let statusArray = ["Not Started", "In Progress", "Complete"]
     
-    var dateLbl:Label!
-    var dateValueLbl:Label!
-    var dateTxtField: PaddedTextField!
+   
     
-    let datePickerView = DatePicker()
-    var dateFormatter = NSDateFormatter()
     
-  
     
     var activeTextField:PaddedTextField?
     
@@ -54,8 +57,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override init(){
         super.init(nibName:nil,bundle:nil)
-        //  println("init equipId = \(equipId) equipName = \(equipName)")
-        title = "WorkOrder"
+        title = "Task"
         
     }
     
@@ -69,9 +71,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        //view.backgroundColor = layoutVars.backgroundColor
-        //title = "Equipment Item"
-        
+       
         //custom back button
         var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         backButton.addTarget(self, action: "goBack", forControlEvents: UIControlEvents.TouchUpInside)
@@ -136,14 +136,8 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.nameLbl = Label(titleText: "Work Order Name")
         self.containerView.addSubview(self.nameLbl)
         
-        /*
-        self.nameValueLbl = Label()
-        self.nameValueLbl.text = "Name Value"
-        self.nameValueLbl.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
-        self.nameValueLbl.setTranslatesAutoresizingMaskIntoConstraints(false)//for autolayout
-        self.containerView.addSubview(self.nameValueLbl)
-*/
-        self.nameValueLbl = Label(titleText: "Name Value",valueMode: true)
+       
+        self.nameValueLbl = Label(titleText: "Name Value")
         self.containerView.addSubview(self.nameValueLbl)
         
         //status
@@ -151,16 +145,9 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.statusLbl = Label(titleText: "Work Order Status")
         self.containerView.addSubview(self.statusLbl)
         
-        self.statusValueLbl = Label(titleText:"Status Value",valueMode: true )
+        self.statusValueLbl = Label(titleText:"Status Value" )
         self.containerView.addSubview(self.statusValueLbl)
         
-        //date
-        
-        self.dateLbl = Label(titleText: "Work Order Date")
-        self.containerView.addSubview(self.dateLbl)
-        
-        self.dateValueLbl = Label(titleText: "Date Value")
-        self.containerView.addSubview(self.dateValueLbl)
         
         //items
         
@@ -184,8 +171,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
             "view2":self.nameValueLbl,
             "view3":self.statusLbl,
             "view4":self.statusValueLbl,
-            "view5":self.dateLbl,
-            "view6":self.dateValueLbl,
+    
             "view7":self.itemsLbl,
             "view8":self.itemsTableView
         ]
@@ -198,7 +184,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.nameLbl.addConstraints(nameLabelConstraint_H)
         
         let nameValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-               self.nameValueLbl.addConstraints(nameValueConstraint_H)
+        self.nameValueLbl.addConstraints(nameValueConstraint_H)
         
         let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         self.statusLbl.addConstraints(statusLabelConstraint_H)
@@ -206,12 +192,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         let statusValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         self.statusValueLbl.addConstraints(statusValueConstraint_H)
         
-        let dateLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.dateLbl.addConstraints(dateLabelConstraint_H)
-        
-        let dateValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        self.dateValueLbl.addConstraints(dateValueConstraint_H)
-        
+       
         let itemsLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         self.itemsLbl.addConstraints(itemsLabelConstraint_H)
         
@@ -224,7 +205,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         
         //auto layout position constraints
         let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]", options: nil, metrics: nil, views: viewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]-[view7(20)]-[view8(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view7(20)]-[view8(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
         
         self.containerView.addConstraints(viewsConstraint_H)
@@ -284,7 +265,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.statusPicker = Picker()
         self.statusPicker.delegate = self
         let statusArray = ["New", "Dispatched", "In Progress", "Complete", "Cancelled"]
-    
+        
         let toolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
         var items = [AnyObject]()
         let nextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "nextPressed")
@@ -306,36 +287,13 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         
-        self.dateLbl = Label(titleText: "Work Order Date")
-        self.containerView.addSubview(self.dateLbl)
-        
-        
-        datePickerView.datePickerMode = UIDatePickerMode.Date
-       // DatePickerView.backgroundColor = layoutVars.backgroundLight
-       
-        
-        datePickerView.addTarget( self, action: "handleDatePicker", forControlEvents: UIControlEvents.ValueChanged )
-        
-        
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        
-        self.dateTxtField = PaddedTextField()
-        self.dateTxtField.returnKeyType = UIReturnKeyType.Next
-        self.dateTxtField.delegate = self
-        self.dateTxtField.tag = 8
-        self.dateTxtField.inputView = self.datePickerView
-        self.dateTxtField.inputAccessoryView = toolbar
-        self.dateTxtField.attributedPlaceholder = NSAttributedString(string:"Purchased Date",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
-        self.containerView.addSubview(self.dateTxtField)
-        
-
         
         //items table
         
         self.itemsLbl = Label(titleText: "Work Order Items")
         self.containerView.addSubview(self.itemsLbl)
         
-        self.itemsTableView  =   TableView()        
+        self.itemsTableView  =   TableView()
         itemsTableView.delegate  =  self
         itemsTableView.dataSource  =  self
         itemsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -353,8 +311,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
             "view2":self.nameTxtField,
             "view3":self.statusLbl,
             "view4":self.statusTxtField,
-            "view5":self.dateLbl,
-            "view6":self.dateTxtField,
+           
             "view7":self.itemsLbl,
             "view8":self.itemsTableView
         ]
@@ -374,12 +331,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         let statusValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view4(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
         self.statusTxtField.addConstraints(statusValueConstraint_H)
         
-        let dateLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view5(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.dateLbl.addConstraints(dateLabelConstraint_H)
-        
-        let dateValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view6(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
-        self.dateTxtField.addConstraints(dateValueConstraint_H)
-        
+       
         let itemsLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view7(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
         self.itemsLbl.addConstraints(itemsLabelConstraint_H)
         
@@ -392,7 +344,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         
         //auto layout position constraints
         let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[view1]", options: nil, metrics: nil, views: editViewsDictionary)
-        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view5(20)]-[view6(inputHeight)]-[view7(20)]-[view8(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[view1(20)]-[view2(inputHeight)]-[view3(20)]-[view4(inputHeight)]-[view7(20)]-[view8(200)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: editViewsDictionary)
         
         
         self.containerView.addConstraints(viewsConstraint_H)
@@ -419,7 +371,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLayoutSubviews()
         
         self.scrollView.frame = view.bounds
-       
+        
     }
     
     
@@ -503,17 +455,12 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     func nextPressed() {
         println("NEXT")
         self.statusTxtField.resignFirstResponder()
-        self.dateTxtField.becomeFirstResponder()
     }
-
     
     
     
-    func handleDatePicker()
-    {
-        println("DATE: \(dateFormatter.stringFromDate(datePickerView.date))")
-        self.dateTxtField.text =  dateFormatter.stringFromDate(datePickerView.date)
-    }
+    
+   
     
     
     
@@ -533,14 +480,14 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     func textFieldShouldReturn(textField: PaddedTextField!) -> Bool {
         textField.resignFirstResponder()
         println("NEXT")
-               return true
+        return true
     }
-
     
     
     
     
-
+    
+    
     
     
     //Calls this function when the tap is recognized.
@@ -579,7 +526,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     
-   
+    
     // What to do when a user finishes editting
     func textFieldDidEndEditing(textField: UITextField) {
         
@@ -596,28 +543,8 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     // called when 'return' key pressed. return NO to ignore.
     // Requires having the text fields using the view controller as the delegate.
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
-        
         // Sends the keyboard away when pressing the "done" button
         resign()
         return true
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
-
-
-
-
-
-
-
-
-

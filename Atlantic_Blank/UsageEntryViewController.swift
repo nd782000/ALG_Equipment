@@ -1,17 +1,18 @@
 //
-//  WorkOrderViewController.swift
+//  UsageEntryViewController.swift
 //  Atlantic_Blank
 //
-//  Created by Nicholas Digiando on 4/6/15.
+//  Created by nicholasdigiando on 4/9/15.
 //  Copyright (c) 2015 Nicholas Digiando. All rights reserved.
 //
+
 
 import Foundation
 
 import UIKit
 import Alamofire
 
-class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UITextFieldDelegate,  UIScrollViewDelegate{
+class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UITextFieldDelegate,  UIScrollViewDelegate{
     
     //class WorkOrderViewController: UIViewController{
     
@@ -42,7 +43,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     let datePickerView = DatePicker()
     var dateFormatter = NSDateFormatter()
     
-  
+    
     
     var activeTextField:PaddedTextField?
     
@@ -142,8 +143,8 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.nameValueLbl.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
         self.nameValueLbl.setTranslatesAutoresizingMaskIntoConstraints(false)//for autolayout
         self.containerView.addSubview(self.nameValueLbl)
-*/
-        self.nameValueLbl = Label(titleText: "Name Value",valueMode: true)
+        */
+        self.nameValueLbl = Label(titleText: "Name Value")
         self.containerView.addSubview(self.nameValueLbl)
         
         //status
@@ -151,7 +152,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.statusLbl = Label(titleText: "Work Order Status")
         self.containerView.addSubview(self.statusLbl)
         
-        self.statusValueLbl = Label(titleText:"Status Value",valueMode: true )
+        self.statusValueLbl = Label(titleText:"Status Value" )
         self.containerView.addSubview(self.statusValueLbl)
         
         //date
@@ -198,7 +199,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.nameLbl.addConstraints(nameLabelConstraint_H)
         
         let nameValueConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view2(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-               self.nameValueLbl.addConstraints(nameValueConstraint_H)
+        self.nameValueLbl.addConstraints(nameValueConstraint_H)
         
         let statusLabelConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:[view3(fullWidth)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         self.statusLbl.addConstraints(statusLabelConstraint_H)
@@ -284,7 +285,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.statusPicker = Picker()
         self.statusPicker.delegate = self
         let statusArray = ["New", "Dispatched", "In Progress", "Complete", "Cancelled"]
-    
+        
         let toolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
         var items = [AnyObject]()
         let nextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "nextPressed")
@@ -311,8 +312,8 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         datePickerView.datePickerMode = UIDatePickerMode.Date
-       // DatePickerView.backgroundColor = layoutVars.backgroundLight
-       
+        // DatePickerView.backgroundColor = layoutVars.backgroundLight
+        
         
         datePickerView.addTarget( self, action: "handleDatePicker", forControlEvents: UIControlEvents.ValueChanged )
         
@@ -328,14 +329,14 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.dateTxtField.attributedPlaceholder = NSAttributedString(string:"Purchased Date",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.containerView.addSubview(self.dateTxtField)
         
-
+        
         
         //items table
         
         self.itemsLbl = Label(titleText: "Work Order Items")
         self.containerView.addSubview(self.itemsLbl)
         
-        self.itemsTableView  =   TableView()        
+        self.itemsTableView  =   TableView()
         itemsTableView.delegate  =  self
         itemsTableView.dataSource  =  self
         itemsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -419,7 +420,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLayoutSubviews()
         
         self.scrollView.frame = view.bounds
-       
+        
     }
     
     
@@ -505,7 +506,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
         self.statusTxtField.resignFirstResponder()
         self.dateTxtField.becomeFirstResponder()
     }
-
+    
     
     
     
@@ -533,14 +534,14 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     func textFieldShouldReturn(textField: PaddedTextField!) -> Bool {
         textField.resignFirstResponder()
         println("NEXT")
-               return true
+        return true
     }
-
     
     
     
     
-
+    
+    
     
     
     //Calls this function when the tap is recognized.
@@ -579,7 +580,7 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     
-   
+    
     // What to do when a user finishes editting
     func textFieldDidEndEditing(textField: UITextField) {
         
@@ -612,12 +613,3 @@ class WorkOrderViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
 }
-
-
-
-
-
-
-
-
-

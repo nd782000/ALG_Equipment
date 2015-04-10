@@ -14,7 +14,7 @@ class ScheduleViewController: ViewController, UITableViewDelegate, UITableViewDa
     
     var layoutVars:LayoutVars = LayoutVars()
     
-    var scheduleTableView: UITableView!
+    var scheduleTableView: TableView!
     var itemArray:NSMutableArray!
     var scheduleArray:NSMutableArray!
     var historyArray:NSMutableArray!
@@ -41,29 +41,29 @@ class ScheduleViewController: ViewController, UITableViewDelegate, UITableViewDa
         historyArray = ["WorkOrder8","WorkOrder9","WorkOrder10","WorkOrder11","WorkOrder12","WorkOrder13","WorkOrder14","WorkOrder15","WorkOrder16","WorkOrder17"]
         itemArray = scheduleArray
         let items = ["Schedule", "History"]
-        let customSC = UISegmentedControl(items: items)
+        let customSC = SegmentedControl(items: items)
         customSC.selectedSegmentIndex = 0
         // Set up Frame and SegmentedControl
-        let frame = UIScreen.mainScreen().bounds
-        customSC.frame = CGRectMake(frame.minX + 10, frame.minY + 66,
-            frame.width - 20, 40)
-        customSC.layer.cornerRadius = 5.0  // Don't let background bleed
-        customSC.backgroundColor = UIColor.blackColor()
-        customSC.tintColor = UIColor.whiteColor()
+        //let frame = UIScreen.mainScreen().bounds
+       // customSC.frame = CGRectMake(frame.minX + 10, frame.minY + 66,
+           // frame.width - 20, 40)
+        //customSC.layer.cornerRadius = 5.0  // Don't let background bleed
+       // customSC.backgroundColor = UIColor.blackColor()
+       // customSC.tintColor = UIColor.whiteColor()
         customSC.addTarget(self, action: "changeSearchOptions:", forControlEvents: .ValueChanged)
         self.view.addSubview(customSC)
         
         
         
         
-        var tableX = (self.view.frame.size.width - 300)/2;
+        //var tableX = (self.view.frame.size.width - 300)/2;
         //search bar
         
         
        // let ds = MyData()
         //table.dataSource = ds
         
-        self.scheduleTableView =  UITableView()
+        self.scheduleTableView =  TableView()
         
         //segmented controller
         
@@ -71,13 +71,35 @@ class ScheduleViewController: ViewController, UITableViewDelegate, UITableViewDa
         
         //result table
         
-        self.scheduleTableView.frame = CGRectMake(10, 106, self.view.frame.size.width - 20, self.view.frame.size.height - 106)
-        self.scheduleTableView.layer.cornerRadius = 4.0
+       // self.scheduleTableView.frame = CGRectMake(10, 106, self.view.frame.size.width - 20, self.view.frame.size.height - 106)
+        //self.scheduleTableView.layer.cornerRadius = 4.0
         //equipmentListTableView.setTranslatesAutoresizingMaskIntoConstraints(false) //allows for autolayout
         self.scheduleTableView.delegate  =  self
         self.scheduleTableView.dataSource  =  self
         self.scheduleTableView.registerClass(ScheduleTableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(self.scheduleTableView)
+        
+        //auto layout group
+        let viewsDictionary = [
+            "view1":customSC,
+            "view2":self.scheduleTableView
+        ]
+        
+        let sizeVals = ["width": layoutVars.fullWidth - 30,"height": self.view.frame.size.height - 124]
+        
+        //////////////   auto layout position constraints   /////////////////////////////
+        
+        let viewsConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view1(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        
+        let tableConstraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view2(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        
+        
+        let viewsConstraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-74-[view1(40)]-10-[view2(height)]", options:NSLayoutFormatOptions.AlignAllLeft, metrics: sizeVals, views: viewsDictionary)
+        
+        
+        self.view.addConstraints(tableConstraint_H)
+        self.view.addConstraints(viewsConstraint_H)
+        self.view.addConstraints(viewsConstraint_V)
         
 
     }
