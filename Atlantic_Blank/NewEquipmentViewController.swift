@@ -17,8 +17,6 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     var test = 1;
     
     var scrollView: UIScrollView!
-    // var containerView: UIView!
-    var containerView:UIView!
     var tapBtn:UIButton!
     var loadingView:UIView!
     
@@ -27,9 +25,11 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     var layoutVars:LayoutVars = LayoutVars()
     var typeValue:String!
     var typeCode:String!
-    var typeID:String!
+    var typeID:Int!
     var typePicker: Picker!
     var typeTxtField: PaddedTextField!
+    var nameTxtField: PaddedTextField!
+    var nameValue: String!
     var makeTxtField: PaddedTextField!
     var modelTxtField: PaddedTextField!
     var serialTxtField: PaddedTextField!
@@ -38,10 +38,15 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     var engineTxtField: PaddedTextField!
     var fuelTxtField: PaddedTextField!
     var purchasedTxtField: PaddedTextField!
-    var crewValue:String!
+    var statusTxtField: PaddedTextField!
+    var statusValue: Int!
+    var statusPicker: Picker!
+    var crewValue:Int!
     var crewPicker :Picker!
     var crewTxtField: PaddedTextField!
-    
+    var imgHasChanged: Bool! = false
+    var backButton: UIButton!
+    var defaultImage : UIImage = UIImage(named:"blank.png")!
     var activeTextField:PaddedTextField?
 
     
@@ -58,45 +63,61 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     let picker = UIImagePickerController()
     
     
-    var eTypes:[String] = []
-    var eTypeIDs:[String] = []
-    var eTypeCodes:[String] = []
-    let crew = ["LC1", "LC2", "LC3", "MS1", "TR1", "TR2", "TR3"]
+    var eTypes:[String] = ["-- None Selected --"]
+    var eTypeIDs:[Int] = [0]
+    var eTypeCodes:[String] = ["00"]
+    var nextNames:[String] = [""]
+    var crewIDs:[Int] = [0]
+    var crew:[String] = ["-- None Selected --"]
+    var statusIDs:[Int] = [0,1,2,3,4]
+    var statuses:[String] = ["-- None Selected --", "Online", "Out of Service", "Needs Repairing", "Winterized"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        println("OLD TYPES: \(eTypes)")
-        Alamofire.request(.POST, "http://atlanticlawnandgarden.com/cp/app/equipmentTypes.php")
+        self.typeID = 0 as Int
+        self.crewValue = 0 as Int
+        self.statusValue = 0 as Int
+        
+        self.loadingView = UIView(frame: CGRect(x: 0, y: 0, width: self.screenSize.width, height: self.screenSize.height))
+        
+        
+        Alamofire.request(.POST, "http://atlanticlawnandgarden.com/cp/app/equipmentPickers.php")
             .responseJSON { (request, response, data, error) in
-                //println("TYPES JSON\(data)")
-                if let allTypes = data as? NSArray {
-                    for thisType in allTypes {
+                let allData: NSDictionary! = data as! NSDictionary!
+                if let typeData: NSArray! = allData["types"] as! NSArray! {
+                    for thisType in typeData {
                         self.addType(thisType as! NSDictionary)
-                        //println("Type Name: \(typename)");
                     }
+                } else {
+                    println("FAIL \(allData)")
                 }
+                
                 self.typePicker.reloadAllComponents()
+                
+                if let crewData: NSArray! = allData["crews"] as! NSArray! {
+                    for thisCrew in crewData {
+                        self.addCrew(thisCrew as! NSDictionary)
+                    }
+                } else {
+                    println("FAIL \(allData)")
+                }
+                
+                self.crewPicker.reloadAllComponents()
         }
         
-        println("NEW TYPES: \(eTypes)")
         
         self.scrollView = UIScrollView()
         self.scrollView.delegate = self
         self.view.addSubview(self.scrollView)
-        
-        //container view for auto layout
-        //self.containerView = UIView()
-        //self.containerView.backgroundColor = layoutVars.backgroundColor
-
-        
+    
         self.tapBtn = UIButton()
         self.tapBtn.frame = CGRectMake(0, 0, screenSize.width, 1000)
         self.tapBtn.backgroundColor = UIColor.clearColor()
         self.tapBtn.addTarget(self, action: "DismissKeyboard", forControlEvents: UIControlEvents.TouchUpInside)
         
-        //self.scrollView.addSubview(self.tapBtn)
+        self.scrollView.addSubview(self.tapBtn)
         
         // Do any additional setup after loading the view.
         view.backgroundColor = layoutVars.backgroundColor
@@ -104,7 +125,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         
         
         //custom back button
-        var backButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        backButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         backButton.addTarget(self, action: "goBack", forControlEvents: UIControlEvents.TouchUpInside)
         backButton.setTitle("Back", forState: UIControlState.Normal)
         backButton.titleLabel!.font =  layoutVars.buttonFont
@@ -117,121 +138,83 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         //navigationItem.rightBarButtonItem = cameraButton
         self.picker.delegate = self
         
-        let typeToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
-        var typeItems = [AnyObject]()
-        //making done button
-        let tnextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "tnextPressed")
-        tnextButton
-        typeItems.append(tnextButton)
-        typeToolbar.barStyle = UIBarStyle.Black
-        typeToolbar.setItems(typeItems, animated: true)
-        
         self.typePicker = Picker()
         self.typePicker.delegate = self
-        self.typeTxtField = PaddedTextField()
+        self.typeTxtField = PaddedTextField(placeholder: "Type")
+        self.typeTxtField.tag = 1
         self.typeTxtField.delegate = self
-        self.typeTxtField.tag = 9
         self.typeTxtField.inputView = typePicker
-        self.typeTxtField.inputAccessoryView = typeToolbar
-        self.typeTxtField.attributedPlaceholder = NSAttributedString(string:"Equipment Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.typeTxtField)
         
 
         self.scrollView.addSubview(self.typeTxtField)
         
-        self.makeTxtField = PaddedTextField()
+        self.nameTxtField = PaddedTextField(placeholder: "Name")
+        self.nameTxtField.tag = 2
+        self.nameTxtField.delegate = self
+        self.scrollView.addSubview(self.nameTxtField)
+        
+        self.makeTxtField = PaddedTextField(placeholder: "Make")
+        self.makeTxtField.tag = 3
         self.makeTxtField.delegate = self
-        self.makeTxtField.tag = 1
-        self.makeTxtField.attributedPlaceholder = NSAttributedString(string:"Make",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.makeTxtField)
         
-        self.modelTxtField = PaddedTextField()
+        self.modelTxtField = PaddedTextField(placeholder: "Model")
+        self.modelTxtField.tag = 4
         self.modelTxtField.delegate = self
-        self.modelTxtField.tag = 2
-        self.modelTxtField.attributedPlaceholder = NSAttributedString(string:"Model",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.modelTxtField)
         
-        self.serialTxtField = PaddedTextField()
+        self.serialTxtField = PaddedTextField(placeholder: "Serial")
+        self.serialTxtField.tag = 5
         self.serialTxtField.delegate = self
-        self.serialTxtField.tag = 3
-        self.serialTxtField.attributedPlaceholder = NSAttributedString(string:"Serial",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.serialTxtField)
         
         
-        self.dealerTxtField = PaddedTextField()
+        self.dealerTxtField = PaddedTextField(placeholder: "Dealer")
+        self.dealerTxtField.tag = 6
         self.dealerTxtField.delegate = self
-        self.dealerTxtField.tag = 4
-        self.dealerTxtField.attributedPlaceholder = NSAttributedString(string:"Dealer",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.dealerTxtField)
         
-        let mileageToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
-        var mileageItems = [AnyObject]()
-        //making done button
-        let mnextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "mnextPressed")
-        mileageItems.append(mnextButton)
-        mileageToolbar.barStyle = UIBarStyle.Black
-        mileageToolbar.setItems(mileageItems, animated: true)
-        self.mileageTxtField = PaddedTextField()
+
+        self.mileageTxtField = PaddedTextField(placeholder: "Milage")
+        self.mileageTxtField.tag = 7
         self.mileageTxtField.delegate = self
-        self.mileageTxtField.tag = 5
-        self.mileageTxtField.inputAccessoryView = mileageToolbar
         self.mileageTxtField.keyboardType = UIKeyboardType.NumberPad
-        self.mileageTxtField.attributedPlaceholder = NSAttributedString(string:"Mileage",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.mileageTxtField)
         
-        self.engineTxtField = PaddedTextField()
+        self.engineTxtField = PaddedTextField(placeholder: "Engine Type")
+        self.engineTxtField.tag = 8
         self.engineTxtField.delegate = self
-        self.engineTxtField.tag = 6
-        self.engineTxtField.attributedPlaceholder = NSAttributedString(string:"Engine Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.engineTxtField)
         
-        self.fuelTxtField = PaddedTextField()
+        self.fuelTxtField = PaddedTextField(placeholder: "Fuel Type")
+        self.fuelTxtField.tag = 9
         self.fuelTxtField.delegate = self
-        self.fuelTxtField.tag = 7
-        self.fuelTxtField.attributedPlaceholder = NSAttributedString(string:"Fuel Type",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.fuelTxtField)
 
-        //datePickerView.datePickerMode = UIDatePickerMode.Date
-        //DatePickerView.backgroundColor = layoutVars.backgroundLight
-        let toolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
-        var items = [AnyObject]()
-        //making done button
-        let nextButton = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: "nextPressed")
-        items.append(nextButton)
-        toolbar.barStyle = UIBarStyle.Black
-        toolbar.setItems(items, animated: true)
+
         
         datePickerView.addTarget( self, action: "handleDatePicker", forControlEvents: UIControlEvents.ValueChanged )
+        datePickerView.datePickerMode = UIDatePickerMode.Date
+        datePickerView.maximumDate = NSDate.new()
         
         //usDateFormat now contains an optional string "MM/dd/yyyy".
         
         dateFormatter.dateFormat = "MM/dd/yyyy"
         
-        self.purchasedTxtField = PaddedTextField()
+        self.purchasedTxtField = PaddedTextField(placeholder: "Purchased Date")
+        self.purchasedTxtField.tag = 10
         self.purchasedTxtField.delegate = self
-        self.purchasedTxtField.tag = 8
         self.purchasedTxtField.inputView = self.datePickerView
-        self.purchasedTxtField.inputAccessoryView = toolbar
-        self.purchasedTxtField.attributedPlaceholder = NSAttributedString(string:"Purchased Date",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.purchasedTxtField)
         
         
-        let crewToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
-        var crewItems = [AnyObject]()
-        //making done button
-        let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "donePressed")
-        crewItems.append(doneButton)
-        crewToolbar.barStyle = UIBarStyle.Black
-        crewToolbar.setItems(crewItems, animated: true)
-        
         self.crewPicker = Picker()
         self.crewPicker.delegate = self
-        self.crewTxtField = PaddedTextField()
+        self.crewTxtField = PaddedTextField(placeholder: "Crew / Employee")
+        self.crewTxtField.tag = 11
         self.crewTxtField.delegate = self
-        self.crewTxtField.tag = 9
         self.crewTxtField.inputView = crewPicker
-        self.crewTxtField.inputAccessoryView = crewToolbar
-        self.crewTxtField.attributedPlaceholder = NSAttributedString(string:"Select Crew / Employee",attributes:[NSForegroundColorAttributeName: layoutVars.buttonColor1])
         self.scrollView.addSubview(self.crewTxtField)
         
         
@@ -243,24 +226,32 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.imageView.contentMode = .ScaleAspectFill
         let tapGesture = UITapGestureRecognizer(target: self, action: "displayPickerOptions:")
         self.imageView.addGestureRecognizer(tapGesture)
-        self.imageView.userInteractionEnabled = true 
-        var image : UIImage = UIImage(named:"blank.png")!
-        self.imageView.image = image
+        self.imageView.userInteractionEnabled = true
+        
+        self.imageView.image = self.defaultImage
         self.imageView.clipsToBounds = true
         
         self.imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.scrollView.addSubview(self.imageView)
         
+        
+        self.statusPicker = Picker()
+        self.statusPicker.delegate = self
+        self.statusTxtField = PaddedTextField(placeholder: "Status")
+        self.statusTxtField.tag = 11
+        self.statusTxtField.delegate = self
+        self.statusTxtField.inputView = statusPicker
+        self.scrollView.addSubview(self.statusTxtField)
+        
         self.progressView = UIProgressView()
-        self.progressView.alpha = 0
         self.progressView.tintColor = UIColor.blueColor()
         self.progressView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.scrollView.addSubview(self.progressView)
+        self.loadingView.addSubview(self.progressView)
         
-        self.progressLbl = Label(text: "Uploading...")
-        self.progressLbl.alpha = 0
+        self.progressLbl = Label(text: "Uploading...", valueMode: false)
+        self.progressLbl.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.progressLbl.textAlignment = NSTextAlignment.Center
-        self.scrollView.addSubview(self.progressLbl)
+        self.loadingView.addSubview(self.progressLbl)
         
         self.submitEquipmentButton = Button(titleText: "Submit")
         self.submitEquipmentButton.addTarget(self, action: "saveData", forControlEvents: UIControlEvents.TouchUpInside)
@@ -276,41 +267,42 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         
         //auto layout group
         let viewsDictionary = [
-            "view1":self.typeTxtField,
-            "view2":self.makeTxtField,
-            "view3":self.modelTxtField,
-            "view4":self.serialTxtField,
-            "view5":self.dealerTxtField,
-            "view6":self.mileageTxtField,
-            "view7":self.engineTxtField,
-            "view8":self.fuelTxtField,
-            "view9":self.purchasedTxtField,
-            "view10":self.crewTxtField,
-            "view11":self.imageView,
-            "view12":self.progressView,
-            "view13":self.progressLbl,
-            "view14":self.submitEquipmentButton
+            "type":self.typeTxtField,
+            "name":self.nameTxtField,
+            "make":self.makeTxtField,
+            "model":self.modelTxtField,
+            "serial":self.serialTxtField,
+            "dealer":self.dealerTxtField,
+            "mileage":self.mileageTxtField,
+            "engine":self.engineTxtField,
+            "fuel":self.fuelTxtField,
+            "purchased":self.purchasedTxtField,
+            "crew":self.crewTxtField,
+            "status":self.statusTxtField,
+            "image":self.imageView,
+            "submit":self.submitEquipmentButton
         ]
+
         
         let sizeVals = ["width": self.view.frame.size.width - 30,"height": 40]
         
         //////////////   auto layout position constraints   /////////////////////////////
         
-        let viewsConstraint_H1:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view1(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H2:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view2]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H3:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view3]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H4:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view4]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H5:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view5]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H6:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view6]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H7:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view7]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H8:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view8]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H9:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view9]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H10:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view10]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H11:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view11]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H12:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view12]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H13:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view13]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_H14:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[view14]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
-        let viewsConstraint_V:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[view1(height)]-15-[view2(height)]-15-[view3(height)]-15-[view4(height)]-15-[view5(height)]-15-[view6(height)]-15-[view7(height)]-15-[view8(height)]-15-[view9(height)]-15-[view10(height)]-15-[view11(width)]-15-[view14(height)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H1:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[type(width)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H2:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[name]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H3:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[make]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H4:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[model]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H5:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[serial]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H6:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[dealer]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H7:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[mileage]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H8:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[engine]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H9:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[fuel]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H10:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[purchased]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H11:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[crew]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H12:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[image]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H13:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[status]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_H14:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[submit]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
+        let viewsConstraint_V:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[type(height)]-15-[name(height)]-15-[make(height)]-15-[model(height)]-15-[serial(height)]-15-[dealer(height)]-15-[mileage(height)]-15-[engine(height)]-15-[fuel(height)]-15-[purchased(height)]-15-[crew(height)]-15-[status(height)]-15-[image(width)]-15-[submit(height)]-15-|", options: nil, metrics: sizeVals, views: viewsDictionary)
         
         self.scrollView.addConstraints(viewsConstraint_H1)
         self.scrollView.addConstraints(viewsConstraint_H2)
@@ -327,6 +319,29 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.scrollView.addConstraints(viewsConstraint_H13)
         self.scrollView.addConstraints(viewsConstraint_H14)
         self.scrollView.addConstraints(viewsConstraint_V)
+        
+        
+        let progressDictionary = [
+            "bar":self.progressView,
+            "label":self.progressLbl
+        ]
+
+
+        let progConstraint_H1:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[bar]-15-|", options: nil, metrics: sizeVals, views: progressDictionary)
+        let progConstraint_H2:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[label]-15-|", options: nil, metrics: sizeVals, views: progressDictionary)
+
+        let progConstraint_V:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("V:|-100-[label(height)]-4-[bar(4)]", options: nil, metrics: sizeVals, views: progressDictionary)
+        
+        self.loadingView.addConstraints(progConstraint_H1)
+        self.loadingView.addConstraints(progConstraint_H2)
+        
+        self.loadingView.addConstraints(progConstraint_V)
+        
+        
+        self.loadingView.backgroundColor = UIColor.whiteColor()
+        self.loadingView.alpha = 0
+        self.view.addSubview(loadingView)
+    
     }
     
     override func viewDidLayoutSubviews() {
@@ -347,9 +362,10 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         if (pickerView == typePicker) {
             // Do something
             return self.eTypes.count
-            
-        }else{
+        }else if (pickerView == crewPicker){
             return self.crew.count
+        } else {
+            return self.statuses.count
         }
         
     }
@@ -358,11 +374,11 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         if (pickerView == typePicker) {
             // Do something
             return self.eTypes[row]
-        }else{
+        }else if (pickerView == crewPicker){
             return self.crew[row]
+        } else {
+            return self.statuses[row]
         }
-        
-        
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
@@ -375,13 +391,20 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
             self.typeID = self.eTypeIDs[row]
             self.typeCode = self.eTypeCodes[row]
             self.typeTxtField.text=self.eTypes[row]
-            println("ID: \(self.typeValue)")
-            println("name: \(self.typeID)")
-            println("code: \(self.typeCode)")
-        }else{
-            self.crewValue=self.crew[row]
+            self.nameTxtField.text=self.nextNames[row]
+            println("type ID: \(self.typeValue)")
+            println("type: \(self.typeID)")
+            println("type code: \(self.typeCode)")
+        } else if (pickerView == crewPicker) {
+            self.crewValue=self.crewIDs[row]
             self.crewTxtField.text=self.crew[row]
-            println("values:----------\(self.crewValue)");
+            println("crew ID: \(self.crewValue)")
+            println("crew: \(self.crew[row])")
+        } else {
+            self.statusValue = self.statusIDs[row]
+            self.statusTxtField.text=self.statuses[row]
+            println("status ID: \(self.statusValue)")
+            println("status: \(self.statuses[row])")
         }
     
     }
@@ -439,10 +462,18 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         var scrollPoint : CGPoint = CGPointMake(0, offset)
         self.scrollView.setContentOffset(scrollPoint, animated: true)
         self.activeTextField = textField as? PaddedTextField
+        textField.textColor = UIColor(hex:0x333333, op: 1)
     }
     
-    func textFieldTextDidEndEditing(textField: PaddedTextField) {
+    func textFieldDidEndEditing(textField: UITextField) {
+        println("HELLLOOOOO")
         self.scrollView.setContentOffset(CGPointZero, animated: true)
+        if(count(textField.text) > 0) {
+            UIView.animateWithDuration(0.75, animations: {() -> Void in
+                textField.backgroundColor = UIColor(hex:0xEDFFF7, op: 0.75)
+                textField.layer.borderColor = UIColor(hex:0x005100, op: 0.6).CGColor
+            })
+        }
     }
     
     
@@ -450,6 +481,9 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         textField.resignFirstResponder()
         println("NEXT")
         switch (textField.tag) {
+            case nameTxtField.tag:
+                makeTxtField.becomeFirstResponder()
+                break;
             case makeTxtField.tag:
                 modelTxtField.becomeFirstResponder()
                 break;
@@ -471,33 +505,13 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
             case purchasedTxtField.tag:
                 crewTxtField.becomeFirstResponder()
                 break;
+            case crewTxtField.tag:
+                statusTxtField.becomeFirstResponder()
+                break;
             default:
                 break;
         }
         return true
-    }
-   
-    func tnextPressed() {
-        println("NEXT")
-        self.typeTxtField.resignFirstResponder()
-        self.makeTxtField.becomeFirstResponder()
-    }
-    
-    func mnextPressed() {
-        println("NEXT")
-        self.mileageTxtField.resignFirstResponder()
-        self.engineTxtField.becomeFirstResponder()
-    }
-    
-    func nextPressed() {
-        println("NEXT")
-        self.purchasedTxtField.resignFirstResponder()
-        self.crewTxtField.becomeFirstResponder()
-    }
-    
-    func donePressed() {
-        println("DONE")
-        self.crewTxtField.resignFirstResponder()
     }
 
     
@@ -521,9 +535,19 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         var typename = thisType["name"] as! String!
         eTypes.append(typename)
         var newtypeID = thisType["ID"] as! String!
-        eTypeIDs.append(newtypeID)
+        eTypeIDs.append(newtypeID.toInt()!)
         var newtypeCode = thisType["code"] as! String!
         eTypeCodes.append(newtypeCode)
+        var nextName = thisType["nextName"] as! String!
+        nextNames.append(nextName)
+    }
+    
+    
+    func addCrew(thisCrew:NSDictionary!) {
+        var crewname = thisCrew["name"] as! String!
+        crew.append(crewname)
+        var crewID = thisCrew["ID"] as! String!
+        crewIDs.append(crewID.toInt()!)
     }
     
     
@@ -536,6 +560,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         
         
         self.imageView.image = chosenImage //4
+        self.imgHasChanged = true
         
         
         
@@ -605,18 +630,50 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     
     
     func saveData(){
-        if(self.imageView.image == nil){
-            println("choose an image")
-            var alert = UIAlertController(title: "Selct an Image", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        if(self.typeID == 0){
+            println("Select Type")
+            
+            self.typeTxtField.backgroundColor = UIColor(hex:0x800800, op: 0.2)
+            self.typeTxtField.layer.borderColor = UIColor(hex:0x800800, op: 0.6).CGColor
+            self.typeTxtField.becomeFirstResponder()
+            
+            var alert = UIAlertController(title: "Select equipment type", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-            
-            
             
             return
         }
         
-        println("saveData")
+        if(self.statusValue == 0){
+            println("Select Status")
+            
+            self.statusTxtField.backgroundColor = UIColor(hex:0x800800, op: 0.2)
+            self.statusTxtField.layer.borderColor = UIColor(hex:0x800800, op: 0.6).CGColor
+            statusTxtField.becomeFirstResponder()
+            
+            var alert = UIAlertController(title: "Select equipment status", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        
+        if(self.imgHasChanged == false){
+            println("choose an image")
+            
+            self.imageView.layer.borderColor = UIColor(hex:0x800800, op: 0.6).CGColor
+            imageView.becomeFirstResponder()
+            
+            var alert = UIAlertController(title: "Select an Image", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        println("saveData: \(self.imageView.image)")
         showLoadingScreen()
         
         var parameters = [
@@ -632,7 +689,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
             "fuel"      :self.fuelTxtField.text,
             "purchased" :self.purchasedTxtField.text,
             "crew"      :self.crewValue,
-            "status" : "To be added later"
+            "status"    :self.statusValue
         ]
         
         
@@ -656,7 +713,6 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
                     
                     // 7
                     if totalBytesRead == totalBytesExpectedToRead {
-                        self.progressView.alpha = 0
                         self.hideLoadingScreen()
                     }
                 }
@@ -682,39 +738,54 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     
     
     func showLoadingScreen(){
-        self.loadingView = UIButton(frame: CGRect(x: 0, y: 0, width: 500, height: 1500))
-        loadingView.backgroundColor = UIColor.grayColor()
-        loadingView.alpha = 0.5
-        self.scrollView.addSubview(loadingView)
-        self.progressView.alpha = 1.0
-        self.progressLbl.alpha = 1.0
         self.view.userInteractionEnabled = false
-        
-        
+        self.backButton.userInteractionEnabled = false
+        UIView.animateWithDuration(0.75, animations: {() -> Void in
+            self.loadingView.alpha = 1
+        })
     }
     
     func hideLoadingScreen(){
-        self.loadingView.removeFromSuperview()
-        self.progressView.alpha = 0
-        self.progressLbl.alpha = 0
+        
+        for view in self.scrollView.subviews {
+            if let fld = view as? PaddedTextField {
+                fld.reset()
+            } else {
+                print("BAD")
+            }
+        }
+        
+        UIView.animateWithDuration(0.75, animations: {() -> Void in
+            self.loadingView.alpha = 0
+            self.view.userInteractionEnabled = true
+        })
+        self.backButton.userInteractionEnabled = true
+        
         //reset values
         self.typePicker.selectRow(0, inComponent: 0, animated: true)
         self.makeTxtField.text = ""
         self.modelTxtField.text = ""
+        self.nameTxtField.text = ""
         self.serialTxtField.text = ""
         self.dealerTxtField.text = ""
         self.mileageTxtField.text = ""
         self.engineTxtField.text = ""
         self.fuelTxtField.text = ""
+        self.progressValue = 0
+        self.progressView.progress = progressValue
         self.purchasedTxtField.text = ""
         self.crewPicker.selectRow(0, inComponent: 0, animated: true)
+        self.typePicker.selectRow(0, inComponent: 0, animated: true)
+        self.statusPicker.selectRow(0, inComponent: 0, animated: true)
         self.typeValue = ""
-        self.crewValue = ""
-        self.imageView.image = nil
-        
-        
-        self.view.userInteractionEnabled = true
-        
+        self.typeTxtField.text = ""
+        self.crewTxtField.text = ""
+        self.statusTxtField.text = ""
+        self.imageView.image = self.defaultImage
+        self.typeID = 0
+        self.crewValue = 0
+        self.statusValue = 0
+
     }
     
     

@@ -59,8 +59,8 @@ class PaddedTextField: UITextField {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor(hex:0x005100, op: 0.2).CGColor
         self.layer.cornerRadius = 4.0
-        self.backgroundColor = UIColor(hex:0xFFFFFF, op: 0.8)
-        var inputFont:UIFont = UIFont(name: "Avenir Next", size: 16)!
+        self.backgroundColor = UIColor(hex:0xFFFFFF, op: 1)
+        var inputFont:UIFont = UIFont(name: "Helvetica Neue", size: 17)!
         self.font = inputFont
         self.returnKeyType = UIReturnKeyType.Next
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -82,6 +82,16 @@ class PaddedTextField: UITextField {
         var newBounds = bounds
         newBounds.origin.x += leftMargin
         return newBounds
+    }
+    
+    func reset() {
+        self.layer.borderColor = UIColor(hex:0x005100, op: 0.2).CGColor
+        self.backgroundColor = UIColor(hex:0xFFFFFF, op: 1)
+    }
+    
+    convenience init(placeholder:String!) {
+        self.init()
+        self.attributedPlaceholder = NSAttributedString(string:placeholder,attributes:[NSForegroundColorAttributeName: UIColor(hex:0x333333, op: 0.75)])
     }
 }
 
@@ -169,9 +179,8 @@ class Label :UILabel{
     convenience init(text: String?, valueMode:Bool = false){
         self.init()
         self.valueMode = true
-        self.textVal = text
+        self.text = text
         var layoutVars:LayoutVars = LayoutVars()
-        //self.backgroundColor = UIColor(hex:0xFFFFFF, op: 0.8)
         
         if(valueMode == true){
             self.textColor = UIColor.blackColor()
@@ -194,7 +203,7 @@ class Label :UILabel{
     }
 }
 
-class Picker:UIPickerView{
+class Picker:UIPickerView, UIPickerViewDelegate{
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -204,7 +213,12 @@ class Picker:UIPickerView{
         super.init(frame: frame)
         self.setTranslatesAutoresizingMaskIntoConstraints(false)//for autolayout
         self.backgroundColor = UIColor.whiteColor()
-        self.layer.cornerRadius = 4.0
+        var layer = self.layer
+        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 8
+        self.delegate = self
     }
     
 }
