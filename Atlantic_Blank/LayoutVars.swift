@@ -29,9 +29,8 @@ class LayoutVars: UIViewController {
     
     //var backgroundColor:UIColor = uicolorFromHex(0xffccff)
     //var buttonColor1:UIColor = uicolorFromHex(0x005100)
-    
-    var fullWidth:CGFloat = 0
-    var fullHeight:CGFloat = 0
+    var fullWidth:CGFloat! = UIScreen.mainScreen().bounds.width
+    var fullHeight:CGFloat! = UIScreen.mainScreen().bounds.height
     
     var navAndStatusBarHeight = 64
     var backgroundColor:UIColor = UIColor(hex:0xFFF8E6, op: 1)
@@ -44,11 +43,6 @@ class LayoutVars: UIViewController {
     var buttonFont:UIFont = UIFont(name: "Helvetica Neue", size: 18)!
     var inputHeight = 50
     
-    
-    override func viewDidLoad() {
-        self.fullWidth = self.view.frame.size.width
-        self.fullHeight = self.view.frame.size.height
-    }
 }
 
 class PaddedTextField: UITextField {
@@ -102,13 +96,15 @@ class TableView: UITableView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        println("TableView")
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor(hex:0x005100, op: 1.0).CGColor
         self.layer.cornerRadius = 4.0
         self.backgroundColor = UIColor(hex:0xFFFFFF, op: 0.8)
         self.separatorColor = UIColor(hex:0x005100, op: 0.6)
         // var inputFont:UIFont = UIFont(name: "Avenir Next", size: 16)!
+        self.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.separatorInset = UIEdgeInsetsZero
+        self.rowHeight = 40
         
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
     }
@@ -187,7 +183,7 @@ class Label :UILabel{
             self.font = UIFont(name: "Avenir Next-italic", size: 16)
             insets = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0)
         }else{
-            self.textColor = layoutVars.buttonColor1
+            self.textColor = UIColor.greenColor()
             self.font = UIFont(name: "Avenir Next", size: 16)
             insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         }
@@ -196,10 +192,9 @@ class Label :UILabel{
         
     }
     
-    
     override func drawTextInRect(rect: CGRect) {
-        
-                    super.drawTextInRect(UIEdgeInsetsInsetRect(rect, insets))
+        insets = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0)
+        super.drawTextInRect(UIEdgeInsetsInsetRect(rect, insets))
     }
 }
 
@@ -257,6 +252,19 @@ class Button:UIButton{
     convenience init(titleText:String!) {
         self.init()
         self.setTitle(titleText, forState: UIControlState.Normal)
+    }
+}
+
+class Cell:UITableViewCell {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.separatorInset = UIEdgeInsetsZero
+        self.layoutMargins = UIEdgeInsetsZero
+        self.preservesSuperviewLayoutMargins = false
     }
 }
 

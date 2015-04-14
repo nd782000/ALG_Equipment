@@ -20,8 +20,6 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     var tapBtn:UIButton!
     var loadingView:UIView!
     
-    let screenSize: CGRect = UIScreen.mainScreen().bounds
-    
     var layoutVars:LayoutVars = LayoutVars()
     var typeValue:String!
     var typeCode:String!
@@ -80,7 +78,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.crewValue = 0 as Int
         self.statusValue = 0 as Int
         
-        self.loadingView = UIView(frame: CGRect(x: 0, y: 0, width: self.screenSize.width, height: self.screenSize.height))
+        self.loadingView = UIView(frame: CGRect(x: 0, y: 0, width: layoutVars.fullWidth, height: layoutVars.fullHeight))
         
         
         Alamofire.request(.POST, "http://atlanticlawnandgarden.com/cp/app/equipmentPickers.php")
@@ -113,7 +111,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.view.addSubview(self.scrollView)
     
         self.tapBtn = UIButton()
-        self.tapBtn.frame = CGRectMake(0, 0, screenSize.width, 1000)
+        self.tapBtn.frame = CGRectMake(0, 0, layoutVars.fullWidth, 1000)
         self.tapBtn.backgroundColor = UIColor.clearColor()
         self.tapBtn.addTarget(self, action: "DismissKeyboard", forControlEvents: UIControlEvents.TouchUpInside)
         
@@ -284,7 +282,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         ]
 
         
-        let sizeVals = ["width": self.view.frame.size.width - 30,"height": 40]
+        let sizeVals = ["width": layoutVars.fullWidth - 30,"height": 40]
         
         //////////////   auto layout position constraints   /////////////////////////////
         
@@ -740,12 +738,36 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
     func showLoadingScreen(){
         self.view.userInteractionEnabled = false
         self.backButton.userInteractionEnabled = false
+        self.progressView.alpha = 1.0
         UIView.animateWithDuration(0.75, animations: {() -> Void in
             self.loadingView.alpha = 1
         })
     }
     
     func hideLoadingScreen(){
+        
+        UIView.animateWithDuration(0.75, animations: {() -> Void in
+            self.progressLbl.text = "New Equipment Added"
+            self.progressView.alpha = 0.0
+            //set 2 second delay so user can read message
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW,
+                Int64(2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+               self.resetForm()
+            }
+            
+            }
+        )
+    }
+    
+    
+   
+    
+    
+    
+    func resetForm(){
+        
+        
         
         for view in self.scrollView.subviews {
             if let fld = view as? PaddedTextField {
@@ -760,6 +782,9 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
             self.view.userInteractionEnabled = true
         })
         self.backButton.userInteractionEnabled = true
+        
+        var scrollPoint : CGPoint = CGPointMake(0, 0)
+        self.scrollView.setContentOffset(scrollPoint, animated: true)
         
         //reset values
         self.typePicker.selectRow(0, inComponent: 0, animated: true)
@@ -786,6 +811,7 @@ class NewEquipmentViewController: UIViewController, UIImagePickerControllerDeleg
         self.crewValue = 0
         self.statusValue = 0
 
+        
     }
     
     

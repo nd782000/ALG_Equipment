@@ -31,9 +31,6 @@ class ViewController: UIViewController, UIActionSheetDelegate, LoginDelegate  {
     
     
     func displayMenuView() {
-        println("displayMenuView")
-        
-        
         var sheet: UIActionSheet = UIActionSheet()
         let title: String = "Menu"
         sheet.title  = title
@@ -56,18 +53,17 @@ class ViewController: UIViewController, UIActionSheetDelegate, LoginDelegate  {
         
         
         switch (buttonIndex) {
-        case 1:
-            delegate.menuChange(1)
-            break;
-        case 2:
-            delegate.menuChange(2)
-            break;
-        case 3:
-            delegate.menuChange(3)
-            break;
-            
-        default:
-            break;
+            case 1:
+                delegate.menuChange(1)
+                break;
+            case 2:
+                delegate.menuChange(2)
+                break;
+            case 3:
+                delegate.menuChange(3)
+                break;
+            default:
+                break;
         }
         
         
@@ -75,33 +71,13 @@ class ViewController: UIViewController, UIActionSheetDelegate, LoginDelegate  {
     }
     
     
-    
-    
-    
     func setLoginStatus() {
-        
-        
         //self.loginButton.title = "Log Out"
     }
-    
-    
-    
-    
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
     
 }

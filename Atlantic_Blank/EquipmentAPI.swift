@@ -147,8 +147,7 @@ class EquipmentInfo: NSObject, ResponseObjectSerializable  {
     
     
     init(id: String, name: String, typeName: String, make: String, model: String, status: String, crew: String, mileage: String, fuel: String, engine: String, pic: String) {
-        println("EquipmentInfo init ")
-        println("EquipmentInfo init id: \(id)")
+        
         self.id = id
         
         self.name = name
@@ -167,7 +166,6 @@ class EquipmentInfo: NSObject, ResponseObjectSerializable  {
     
     
     required init(response: NSHTTPURLResponse, representation: AnyObject) {
-        println("EquipmentInfo init response: \(response)")
         self.id = representation.valueForKeyPath("equipment.id") as! String
         
         self.name = representation.valueForKeyPath("equipment.name") as! String
