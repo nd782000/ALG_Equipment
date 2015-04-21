@@ -203,11 +203,11 @@ class EquipmentViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         //auto layout position constraints
-        let topConstraint_H:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[image(144)]-15-[info(infoWidth)]-15-|", options: nil, metrics: metrics, views: layoutDictionary)
+        let topConstraint_H:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[image(144)]-15-[info]-15-|", options: nil, metrics: metrics, views: layoutDictionary)
         let scConstraint_H:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[sc]-15-|", options: nil, metrics: nil, views: layoutDictionary)
         let tableConstraint_H:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[table]-15-|", options: nil, metrics: nil, views: layoutDictionary)
-        let viewsConstraint_V:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("V:|-79-[image(144)]-15-[sc(40)]-15-[table]-15-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: nil, views: layoutDictionary)
-        let viewsConstraint_V2:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("V:|-79-[info(144)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: nil, views: layoutDictionary)
+        let viewsConstraint_V:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("V:|-79-[image(144)]-15-[sc(40)]-15-[table]-15-|", options: nil, metrics: nil, views: layoutDictionary)
+        let viewsConstraint_V2:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("V:|-79-[info(144)]", options: nil, metrics: nil, views: layoutDictionary)
         
         
         self.view.addConstraints(topConstraint_H)

@@ -21,13 +21,6 @@ class ItemListViewController: UIViewController, UITableViewDelegate, UITableView
     var itemName:String!
     
     
-    
-    
-    var delegate:ItemDelegate!
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -132,9 +125,6 @@ class ItemListViewController: UIViewController, UITableViewDelegate, UITableView
        // let i = (navigationController?.viewControllers.count)! - 1
         //let itemViewController = navigationController?.viewControllers[i] as ItemViewController
        // itemViewController.typeValueLbl.text = itemName
-        if((itemName) != nil){
-            delegate.itemChange(itemID, itemName: itemName)
-        }
         navigationController?.popViewControllerAnimated(true)
     }
     

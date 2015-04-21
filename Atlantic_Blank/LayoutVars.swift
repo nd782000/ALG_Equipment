@@ -37,6 +37,7 @@ class LayoutVars: UIViewController {
     var backgroundLight:UIColor = UIColor(hex:0xFFFaF8, op: 1)
     var buttonBackground:UIColor = UIColor(hex:0xFFFFFF, op: 1)
     var buttonTint:UIColor = UIColor(hex:0x005100, op: 1)
+    var buttonActive:UIColor = UIColor(hex:0x227322, op: 1)
     var buttonColor1:UIColor = UIColor(hex:0x005100, op: 1)
     var buttonTextColor:UIColor = UIColor(hex:0xffffff, op: 1)
     var borderColor:CGColor = UIColor(hex:0x005100, op: 1).CGColor
@@ -58,7 +59,6 @@ class PaddedTextField: UITextField {
         self.font = inputFont
         self.returnKeyType = UIReturnKeyType.Next
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.frame.size.height = 40
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -87,6 +87,11 @@ class PaddedTextField: UITextField {
         self.init()
         self.attributedPlaceholder = NSAttributedString(string:placeholder,attributes:[NSForegroundColorAttributeName: UIColor(hex:0x333333, op: 0.75)])
     }
+    
+    convenience init(textValue:String!) {
+        self.init()
+        self.text = textValue
+    }
 }
 
 
@@ -105,6 +110,8 @@ class TableView: UITableView {
         self.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         self.separatorInset = UIEdgeInsetsZero
         self.rowHeight = 40
+        
+        self.tableHeaderView = nil
         
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
     }
@@ -180,7 +187,7 @@ class Label :UILabel{
         
         if(valueMode == true){
             self.textColor = UIColor.blackColor()
-            self.font = UIFont(name: "Avenir Next-italic", size: 16)
+            self.font = UIFont(name: "Avenir Next", size: 16)
             insets = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0)
         }else{
             self.textColor = UIColor.greenColor()
@@ -197,6 +204,74 @@ class Label :UILabel{
         super.drawTextInRect(UIEdgeInsetsInsetRect(rect, insets))
     }
 }
+
+class H1Label :UILabel{
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+    }
+    
+    convenience init(text: String?){
+        self.init()
+        self.text = text
+        self.textAlignment = NSTextAlignment.Center
+        self.textColor = UIColor.blackColor()
+        self.font = UIFont(name: "Avenir Next", size: 26)
+        self.setTranslatesAutoresizingMaskIntoConstraints(false)//for autolayout
+    }
+    
+}
+
+class InfoLabel :UILabel{
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+    }
+    
+    convenience init(text: String?){
+        self.init()
+        self.text = text
+        self.textColor = UIColor.blackColor()
+        self.font = UIFont(name: "Avenir Next", size: 18)
+        self.setTranslatesAutoresizingMaskIntoConstraints(false)//for autolayout
+    }
+    
+}
+
+class THead :UILabel{
+    var valueMode:Bool!
+    var insets:UIEdgeInsets!
+    var textVal:String!
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+    }
+    
+    convenience init(text: String?){
+        self.init()
+        self.text = text
+        self.font = UIFont(name: "Avenir Next-italic", size: 16)
+        self.textColor = UIColor.whiteColor()
+        self.setTranslatesAutoresizingMaskIntoConstraints(false)//for autolayout
+    }
+    
+}
+
 
 class Picker:UIPickerView, UIPickerViewDelegate{
     
@@ -242,7 +317,7 @@ class Button:UIButton{
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(hex:0x005100, op: 1.0)
-        self.titleLabel!.font = UIFont(name: "Helvetica Neue", size: 18)!
+        self.titleLabel!.font = UIFont(name: "Helvetica Neue", size: 16)!
         self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         self.layer.cornerRadius = 4.0
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -267,4 +342,108 @@ class Cell:UITableViewCell {
         self.preservesSuperviewLayoutMargins = false
     }
 }
+
+class GreyLabel:UILabel {
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+    }
+    
+    var insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+
+    convenience init(icon:Bool){
+        self.init()
+        if(icon == true){
+            insets = UIEdgeInsets(top: 0.0, left: 30.0, bottom: 0.0, right: 0.0)
+        }else{
+            insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        }
+        // var inputFont:UIFont = UIFont(name: "Avenir Next", size: 16)!
+        self.setTranslatesAutoresizingMaskIntoConstraints(false)//for autolayout
+        
+    }
+    
+    override func drawTextInRect(rect: CGRect) {
+        super.drawTextInRect(UIEdgeInsetsInsetRect(rect, insets))
+    }
+}
+
+class ItemCell: UITableViewCell {
+    var id:String!
+    var itemStatusIcon: UIView! = UIView()
+    var nameLbl: UILabel! = UILabel()
+    var estLbl: UILabel! = UILabel()
+    var actLbl: UILabel! = UILabel()
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        itemStatusIcon.layer.cornerRadius = 10
+        itemStatusIcon.layer.masksToBounds = true
+        itemStatusIcon.setTranslatesAutoresizingMaskIntoConstraints(false)
+        contentView.addSubview(itemStatusIcon)
+        
+        
+        nameLbl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        estLbl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        actLbl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        contentView.addSubview(nameLbl)
+        contentView.addSubview(estLbl)
+        contentView.addSubview(actLbl)
+        
+        self.separatorInset = UIEdgeInsetsZero
+        self.layoutMargins = UIEdgeInsetsZero
+        self.preservesSuperviewLayoutMargins = false
+        
+        let viewsDictionary = ["status":itemStatusIcon,"name":nameLbl,"est":estLbl,"act":actLbl]
+        
+        let viewsConstraint_V:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[status(20)]-10-|", options: nil, metrics: nil, views: viewsDictionary)
+        
+        let viewsConstraint_H:[AnyObject] = NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[status(20)]-15-[name]-5-[est(40)]-5-[act(30)]-5-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: nil, views: viewsDictionary)
+        
+        contentView.addConstraints(viewsConstraint_H)
+        contentView.addConstraints(viewsConstraint_V)
+        
+    }
+    
+    
+    
+    func setStatus(status: Int) {
+        
+        switch (status % 5) {
+        case 2:
+            itemStatusIcon.backgroundColor = UIColor.greenColor()
+            break;
+        case 3:
+            itemStatusIcon.backgroundColor = UIColor.redColor()//out of service
+            break;
+        case 4:
+            itemStatusIcon.backgroundColor = UIColor.orangeColor()//needs repair
+            break;
+        default:
+            itemStatusIcon.backgroundColor = UIColor(hex: 0xCCCCCC, op: 1)//online
+            break;
+        }
+        
+    }
+    
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+    }
+    
+    
+}
+
 

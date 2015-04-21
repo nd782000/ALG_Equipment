@@ -56,7 +56,7 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
     init(){
         super.init(nibName:nil,bundle:nil)
         //  println("init equipId = \(equipId) equipName = \(equipName)")
-        title = "WorkOrder"
+        title = "Usage Entry"
         
     }
     
@@ -491,10 +491,10 @@ class UsageEntryViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if(indexPath.row == 0){
             println("add new")
-            let itemViewController = ItemViewController(laborMode: true,editMode:true)
+            let itemViewController = ItemViewController()
             navigationController?.pushViewController(itemViewController, animated: true )
         }else{
-            let itemViewController = ItemViewController(laborMode: true,editMode:false)
+            let itemViewController = ItemViewController()
             navigationController?.pushViewController(itemViewController, animated: true )
         }
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5512E2C11ADF021C00284BCF /* NewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512E2C01ADF021C00284BCF /* NewItemViewController.swift */; };
 		55B9B7221AD6BBDD00E2F37A /* UsageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B9B7211AD6BBDD00E2F37A /* UsageListViewController.swift */; };
 		55B9B7241AD6BC3700E2F37A /* UsageEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B9B7231AD6BC3700E2F37A /* UsageEntryViewController.swift */; };
 		55B9B7261AD6BC7200E2F37A /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B9B7251AD6BC7200E2F37A /* TaskViewController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5512E2C01ADF021C00284BCF /* NewItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewItemViewController.swift; sourceTree = "<group>"; };
 		55B9B7211AD6BBDD00E2F37A /* UsageListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageListViewController.swift; sourceTree = "<group>"; };
 		55B9B7231AD6BC3700E2F37A /* UsageEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsageEntryViewController.swift; sourceTree = "<group>"; };
 		55B9B7251AD6BC7200E2F37A /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				55F5178D1AD2E7A8009D06EC /* NetData.swift */,
 				55F5178F1AD2E7F6009D06EC /* WorkOrderViewController.swift */,
 				55F517911AD2E843009D06EC /* ItemViewController.swift */,
+				5512E2C01ADF021C00284BCF /* NewItemViewController.swift */,
 				55F517951AD2E85D009D06EC /* ItemListViewController.swift */,
 				55B9B7211AD6BBDD00E2F37A /* UsageListViewController.swift */,
 				55B9B7231AD6BC3700E2F37A /* UsageEntryViewController.swift */,
@@ -359,6 +362,7 @@
 				55F517901AD2E7F6009D06EC /* WorkOrderViewController.swift in Sources */,
 				55F517881AD2E671009D06EC /* EquipmentViewController.swift in Sources */,
 				55B9B7281AD75E8F00E2F37A /* UsageTableViewCell.swift in Sources */,
+				5512E2C11ADF021C00284BCF /* NewItemViewController.swift in Sources */,
 				55B9B7261AD6BC7200E2F37A /* TaskViewController.swift in Sources */,
 				55F5179E1AD2E8B1009D06EC /* ItemTableViewCell.swift in Sources */,
 				55F5175B1AD2E052009D06EC /* AppDelegate.swift in Sources */,
@@ -482,7 +486,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Atlantic_Blank/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -497,7 +501,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Atlantic_Blank/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
